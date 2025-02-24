@@ -1,7 +1,7 @@
-"use client"; // Pastikan ini ada di bagian atas file
+"use client";
 
 import * as React from "react";
-import { Github, Moon, Sun, CalendarIcon } from "lucide-react";
+import { Github, Moon, Sun, CalendarIcon, Menu } from "lucide-react";
 
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -30,21 +30,23 @@ import {
 
 const Home = () => {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false); // State untuk memastikan komponen sudah di-mount
+  const [mounted, setMounted] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  // Gunakan useEffect untuk memastikan komponen sudah di-mount di client
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Jika komponen belum di-mount, jangan render apa-apa
   if (!mounted) {
     return null;
   }
 
-  // Fungsi untuk toggle tema
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -54,42 +56,55 @@ const Home = () => {
       } w-full font-inter`}
     >
       <div className="container mx-auto px-4 min-h-screen border-l border-r border-stone-800 border-[0.5px] border-dashed border-t-0 border-b-0">
-        {/* Garis Horizontal Full Width */}
-        <div className="flex items-center justify-between space-x-4 pt-2 pb-2">
-          {/* Navigasi */}
-          <NavigationMenu>
-            <NavigationMenuList className="gap-4">
-              <NavigationMenuItem>
-                <Link href="/docs" legacyBehavior passHref>
-                  <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium`}
-                  >
-                    Documentation
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/about" legacyBehavior passHref>
-                  <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium`}
-                  >
-                    About Project
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/contact" legacyBehavior passHref>
-                  <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium`}
-                  >
-                    Contact
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+        {/* Header Section */}
+        <div className="flex items-center justify-between pt-2 pb-2">
+          {/* Logo atau Menu untuk Desktop */}
+          <div className="hidden md:flex items-center space-x-4">
+            <NavigationMenu>
+              <NavigationMenuList className="flex gap-4">
+                <NavigationMenuItem>
+                  <Link href="/docs" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium bg-transparent`}
+                    >
+                      Documentation
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/about" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium bg-transparent`}
+                    >
+                      About Project
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/contact" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium bg-transparent`}
+                    >
+                      Contact
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
 
-          {/* Tombol di kanan */}
+          {/* Tombol Menu untuk Mobile */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleMenu}
+            className="md:hidden"
+          >
+            <Menu className="h-[1.2rem] w-[1.2rem]" />
+            <span className="sr-only">Toggle menu</span>
+          </Button>
+
+          {/* Tombol di kanan (Toggle Theme dan GitHub) */}
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
@@ -115,6 +130,43 @@ const Home = () => {
             </Button>
           </div>
         </div>
+
+        {/* Dropdown Menu untuk Mobile */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4">
+            <NavigationMenu>
+              <NavigationMenuList className="flex flex-col gap-2">
+                <NavigationMenuItem>
+                  <Link href="/docs" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium w-full text-center bg-transparent w-screen`}
+                    >
+                      Documentation
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/about" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium w-full text-center bg-transparent`}
+                    >
+                      About Project
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/contact" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium w-full text-center bg-transparent`}
+                    >
+                      Contact
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+        )}
 
         <div className="absolute left-0 w-screen border-t border-stone-800 border-dashed"></div>
         {/* Konten Anda di sini */}
