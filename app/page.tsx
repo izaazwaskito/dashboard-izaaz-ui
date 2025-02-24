@@ -1,101 +1,374 @@
-import Image from "next/image";
+"use client"; // Pastikan ini ada di bagian atas file
 
-export default function Home() {
+import * as React from "react";
+import { Github, Moon, Sun, CalendarIcon } from "lucide-react";
+
+import Link from "next/link";
+import { useTheme } from "next-themes";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+
+const Home = () => {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false); // State untuk memastikan komponen sudah di-mount
+
+  // Gunakan useEffect untuk memastikan komponen sudah di-mount di client
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Jika komponen belum di-mount, jangan render apa-apa
+  if (!mounted) {
+    return null;
+  }
+
+  // Fungsi untuk toggle tema
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div
+      className={`${
+        theme === "dark" ? "bg-black" : "bg-white"
+      } w-full font-inter`}
+    >
+      <div className="container mx-auto px-4 min-h-screen border-l border-r border-stone-800 border-[0.5px] border-dashed border-t-0 border-b-0">
+        {/* Garis Horizontal Full Width */}
+        <div className="flex items-center justify-between space-x-4 pt-2 pb-2">
+          {/* Navigasi */}
+          <NavigationMenu>
+            <NavigationMenuList className="gap-4">
+              <NavigationMenuItem>
+                <Link href="/docs" legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium`}
+                  >
+                    Documentation
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link href="/about" legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium`}
+                  >
+                    About Project
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link href="/contact" legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium`}
+                  >
+                    Contact
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Tombol di kanan */}
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => window.open("https://github.com", "_blank")}
+              className={`${theme === "dark" ? "bg-grey-900" : "bg-grey-100"}`}
+            >
+              <Github className="h-[1.2rem] w-[1.2rem]" />
+              <span className="sr-only">GitHub</span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className={`${theme === "dark" ? "bg-grey-900" : "bg-grey-100"}`}
+            >
+              {theme === "dark" ? (
+                <Sun className="h-[1.2rem] w-[1.2rem]" />
+              ) : (
+                <Moon className="h-[1.2rem] w-[1.2rem]" />
+              )}
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className="absolute left-0 w-screen border-t border-stone-800 border-dashed"></div>
+        {/* Konten Anda di sini */}
+        <div className="pt-32">
+          {/* Card Profil */}
+          <Card
+            className={`${
+              theme === "dark"
+                ? "bg-stone-900 border-stone-800"
+                : "bg-gray-100 border-gray-200"
+            }`}
+          >
+            <CardHeader>
+              <div className="flex items-center space-x-4">
+                {/* Avatar */}
+                <Avatar>
+                  <AvatarImage src="/path-to-your-image.jpg" alt="Izaaz" />
+                  <AvatarFallback>IW</AvatarFallback>
+                </Avatar>
+                <div>
+                  <CardTitle
+                    className={`${
+                      theme === "dark" ? "text-white" : "text-black"
+                    } text-3xl font-bold`}
+                  >
+                    Izaaz Waskito Widyarto
+                  </CardTitle>
+                  <CardDescription
+                    className={`${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    <HoverCard>
+                      <HoverCardTrigger>
+                      <div className="hover:underline cursor-pointer">QA Automation Engineer at Bank Mandiri</div>
+                      </HoverCardTrigger>
+                      <HoverCardContent className={`${
+                  theme === "dark"
+                    ? "bg-stone-900 border-stone-800"
+                    : "bg-gray-100 border-gray-200"
+                } w-80  `}>
+                        <div className="flex space-x-4">
+                          <Avatar>
+                            <AvatarImage src="https://github.com/vercel.png" />
+                            <AvatarFallback>BM</AvatarFallback>
+                          </Avatar>
+                          <div className="space-y-1">
+                            <h4 className="text-sm font-semibold">PT Bank Mandiri (Persero) Tbk.</h4>
+                            <p className="text-sm">
+                              QA Automation Engineer
+                            </p>
+                            <div className="flex items-center pt-2">
+                              <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{" "}
+                              <span className="text-xs text-muted-foreground">
+                                Joined May 2024
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </HoverCardContent>
+                    </HoverCard>
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p
+                className={`${
+                  theme === "dark" ? "text-gray-400" : "text-gray-600"
+                } text-lg mb-4`}
+              > 
+                Sebagai QA Automation Engineer di Bank Mandiri, saya
+                mengembangkan skrip pengujian otomatis untuk API, UI/Web, dan
+                aplikasi desktop menggunakan UiPath dan Playwright. Saya juga
+                terlibat dalam proses patch database untuk memastikan keandalan
+                sistem.
+              </p>
+              {/* Badge Keahlian */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                <Badge className="bg-purple-600 hover:bg-purple-700">
+                  CI/CD
+                </Badge>
+                <Badge className="bg-orange-600 hover:bg-orange-700">
+                  UiPath
+                </Badge>
+                <Badge className="bg-green-600 hover:bg-green-700">
+                  Playwright
+                </Badge>
+                <Badge className="bg-blue-600 hover:bg-blue-700">Jira</Badge>
+                <Badge className="bg-red-600 hover:bg-red-700">
+                  API Testing
+                </Badge>
+                <Badge className="bg-yellow-600 hover:bg-yellow-700">
+                  UI/Web Testing
+                </Badge>
+                <Badge className="bg-pink-600 hover:bg-pink-700">
+                  Application Testing
+                </Badge>
+                <Badge className="bg-teal-600 hover:bg-teal-700">
+                  Patch DB
+                </Badge>
+              </div>
+              {/* Tombol Aksi */}
+              <div className="flex space-x-4">
+                <Button
+                  className={`${
+                    theme === "dark"
+                      ? "text-black bg-white hover:bg-stone-600 hover:text-white"
+                      : "text-white bg-black hover:bg-gray-800"
+                  }`}
+                >
+                  <a
+                    href="/CV Izaaz Waskito.pdf"
+                    download="IzaazWaskito_CV.pdf"
+                  >
+                    Download CV
+                  </a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Section Proyek yang Pernah Dikerjakan */}
+          <div className="mt-16">
+            <h2
+              className={`${
+                theme === "dark" ? "text-white" : "text-black"
+              } text-2xl font-bold mb-8`}
+            >
+              Proyek yang Pernah Dikerjakan
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Proyek 1 */}
+              <Card
+                className={`${
+                  theme === "dark"
+                    ? "bg-stone-900 border-stone-800"
+                    : "bg-gray-100 border-gray-200"
+                }`}
+              >
+                <CardHeader>
+                  <CardTitle
+                    className={`${
+                      theme === "dark" ? "text-white" : "text-black"
+                    } text-xl`}
+                  >
+                    Kopra Project 2024
+                  </CardTitle>
+                  <CardDescription
+                    className={`${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Bank Mandiri
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p
+                    className={`${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Mengembangkan dan mengelola skrip pengujian otomatis untuk
+                    aplikasi internal Bank Mandiri menggunakan UiPath dan
+                    Playwright. Bertanggung jawab atas integrasi pengujian
+                    otomatis ke dalam pipeline CI/CD.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Proyek 2 */}
+              <Card
+                className={`${
+                  theme === "dark"
+                    ? "bg-stone-900 border-stone-800"
+                    : "bg-gray-100 border-gray-200"
+                }`}
+              >
+                <CardHeader>
+                  <CardTitle
+                    className={`${
+                      theme === "dark" ? "text-white" : "text-black"
+                    } text-xl`}
+                  >
+                    Pengujian Aplikasi Web E-Commerce
+                  </CardTitle>
+                  <CardDescription
+                    className={`${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Proyek Freelance
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p
+                    className={`${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Membuat skrip pengujian otomatis untuk aplikasi e-commerce
+                    menggunakan Playwright. Fokus pada pengujian fungsionalitas
+                    keranjang belanja, pembayaran, dan integrasi API.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Proyek 3 */}
+              <Card
+                className={`${
+                  theme === "dark"
+                    ? "bg-stone-900 border-stone-800"
+                    : "bg-gray-100 border-gray-200"
+                }`}
+              >
+                <CardHeader>
+                  <CardTitle
+                    className={`${
+                      theme === "dark" ? "text-white" : "text-black"
+                    } text-xl`}
+                  >
+                    Optimasi Pipeline CI/CD
+                  </CardTitle>
+                  <CardDescription
+                    className={`${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Bank Mandiri
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p
+                    className={`${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Meningkatkan efisiensi pipeline CI/CD dengan
+                    mengintegrasikan pengujian otomatis dan memastikan eksekusi
+                    pengujian yang cepat dan andal. Menggunakan tools seperti
+                    Jenkins dan GitLab CI.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Home;
