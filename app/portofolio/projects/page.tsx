@@ -15,9 +15,8 @@ import {
 import { MainNav } from "@/components/navigation/MainNav";
 
 const Home = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -34,20 +33,7 @@ const Home = () => {
   if (!mounted) {
     return null;
   }
-
-  const skills = [
-    "Next.js",
-    "React Native",
-    "Astro",
-    "Material UI",
-    "Framer Motion",
-    "Node.js",
-    "TypeScript",
-    "PostgreSQL",
-    "JavaScript",
-    "Jest",
-    "Vue.js",
-  ];
+   
 
   return (
     <div

@@ -71,14 +71,6 @@ const Home = () => {
   if (!mounted) {
     return null;
   }
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
   const skills = [
     // Testing & Automation
     { name: "QA Automation", icon: <Workflow size={24} /> },
