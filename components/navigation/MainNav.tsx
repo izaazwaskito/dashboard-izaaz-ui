@@ -63,7 +63,7 @@
 
           {/* Tombol kanan (Theme & GitHub) */}
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={() => window.open("https://github.com", "_blank")}>
+            <Button variant="ghost" size="icon" onClick={() => window.open("https://github.com/izaazwaskito", "_blank")}>
               <Github className="h-[1.2rem] w-[1.2rem]" />
               <span className="sr-only">GitHub</span>
             </Button>

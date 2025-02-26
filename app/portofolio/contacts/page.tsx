@@ -52,7 +52,7 @@ const Home = () => {
         <div className="absolute left-0 w-full border-t border-stone-800 border-dashed"></div>
 
         {/* Konten tengah */}
-        <div className="flex justify-center items-center min-h-[calc(100vh-4rem)] px-4">
+        <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
           <motion.div
             variants={cardVariants}
             initial="hidden"
@@ -63,7 +63,7 @@ const Home = () => {
                 theme === "dark"
                   ? "bg-stone-900 border-stone-800 text-gray-300"
                   : "bg-gray-100 border-gray-200 text-gray-600"
-              } w-full md:w-[500px] max-h-[90vh] p-6 md:p-8 shadow-lg overflow-y-auto`}
+              } w-full lg:w-[500px] md:w-full max-h-[90vh] p-6 md:p-8 shadow-lg overflow-y-auto`}
             >
               <Accordion type="single" collapsible>
                 <AccordionItem value="about-me">
