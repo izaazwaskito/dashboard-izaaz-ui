@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import { MainNav } from "@/components/navigation/MainNav";
 
-// Variants untuk animasi Card
+// Variants for Card animation
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.9 },
   visible: {
@@ -22,13 +22,13 @@ const cardVariants = {
   },
 };
 
-// Variants untuk animasi Accordion
+// Variants for Accordion animation
 const accordionVariants = {
   hidden: { opacity: 0, y: -10 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
-const Home = () => {
+const Contacts = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -48,10 +48,10 @@ const Home = () => {
         {/* Header */}
         <MainNav />
 
-        {/* Border garis horizontal */}
+        {/* Horizontal border line */}
         <div className="absolute left-0 w-full border-t border-stone-800 border-dashed"></div>
 
-        {/* Konten tengah */}
+        {/* Center content */}
         <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
           <motion.div
             variants={cardVariants}
@@ -67,7 +67,7 @@ const Home = () => {
             >
               <Accordion type="single" collapsible>
                 <AccordionItem value="about-me">
-                  <AccordionTrigger>Siapa Izaaz?</AccordionTrigger>
+                  <AccordionTrigger>Who is Izaaz?</AccordionTrigger>
                   <motion.div
                     variants={accordionVariants}
                     initial="hidden"
@@ -75,16 +75,13 @@ const Home = () => {
                     exit="hidden"
                   >
                     <AccordionContent>
-                      Saya adalah QA Automation di Mandiri yang berfokus pada
-                      pengujian otomatisasi dan analisis kualitas perangkat
-                      lunak. Saya juga memiliki dashboard yang saya bagikan di
-                      LinkedIn.
+                      I am a QA Automation Engineer at Mandiri, focusing on test automation and software quality analysis. I also share my dashboard on LinkedIn.
                     </AccordionContent>
                   </motion.div>
                 </AccordionItem>
                 <AccordionItem value="skills">
                   <AccordionTrigger>
-                    Apa keahlian saya? Selain sebagai QA Automation
+                    What are my skills besides QA Automation?
                   </AccordionTrigger>
                   <motion.div
                     variants={accordionVariants}
@@ -93,16 +90,13 @@ const Home = () => {
                     exit="hidden"
                   >
                     <AccordionContent>
-                      Saya berpengalaman dalam pengujian otomatisasi, pembuatan
-                      skrip test, serta analisis hasil pengujian. Saya juga
-                      terbiasa dengan Next.js, JavaScript (Node.js), dan
-                      berbagai tools testing lainnya.
+                      I have experience in test automation, test script development, and test result analysis. I am also proficient in Next.js, JavaScript (Node.js), and various testing tools.
                     </AccordionContent>
                   </motion.div>
                 </AccordionItem>
                 <AccordionItem value="contact">
                   <AccordionTrigger>
-                    Bagaimana cara menghubungi saya?
+                    How can you contact me?
                   </AccordionTrigger>
                   <motion.div
                     variants={accordionVariants}
@@ -111,7 +105,7 @@ const Home = () => {
                     exit="hidden"
                   >
                     <AccordionContent>
-                      Kamu bisa menghubungi saya melalui LinkedIn atau email.
+                      You can reach me via LinkedIn or email.
                       <br />
                       📩 <strong>Email:</strong> [izaaz.waskito@gmail.com] 🔗{" "}
                       <strong>LinkedIn:</strong>{" "}
@@ -140,4 +134,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Contacts;

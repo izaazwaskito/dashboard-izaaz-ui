@@ -33,7 +33,6 @@ const Home = () => {
   if (!mounted) {
     return null;
   }
-   
 
   return (
     <div
@@ -41,12 +40,12 @@ const Home = () => {
         theme === "dark" ? "bg-black" : "bg-white"
       } w-full font-inter overflow-hidden`}
     >
-      <div className="container   mx-auto px-4 min-h-screen border-l border-r border-stone-800 border-[0.5px] border-dashed border-t-0 border-b-0">
+      <div className="container mx-auto px-4 min-h-screen border-l border-r border-stone-800 border-[0.5px] border-dashed border-t-0 border-b-0">
         {/* Header Section */}
         <MainNav />
 
         <div className="absolute left-0 w-full border-t border-stone-800 border-dashed"></div>
-        {/* Konten Anda di sini */}
+        {/* Your content here */}
         <div className="flex justify-center items-center min-h-screen">
           <motion.div
             className="my-auto"
@@ -59,7 +58,7 @@ const Home = () => {
               Projects/Work
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Proyek 1 */}
+              {/* Project 1 */}
               <Card
                 className={
                   theme === "dark"
@@ -87,15 +86,12 @@ const Home = () => {
                       theme === "dark" ? "text-gray-300" : "text-gray-600"
                     }
                   >
-                    Mengembangkan dan mengelola skrip pengujian otomatis untuk
-                    aplikasi internal Bank Mandiri menggunakan UiPath dan
-                    Playwright. Bertanggung jawab atas integrasi pengujian
-                    otomatis ke dalam pipeline CI/CD.
+                    Developing and managing automated test scripts for Bank Mandiri's internal applications using UiPath and Playwright. Responsible for integrating automated testing into the CI/CD pipeline.
                   </p>
                 </CardContent>
               </Card>
 
-              {/* Proyek 2 */}
+              {/* Project 2 */}
               <Card
                 className={
                   theme === "dark"
@@ -107,14 +103,14 @@ const Home = () => {
                   <CardTitle
                     className={theme === "dark" ? "text-white" : "text-black"}
                   >
-                    Pengujian Aplikasi Web E-Commerce
+                    E-Commerce Web Application Testing
                   </CardTitle>
                   <CardDescription
                     className={
                       theme === "dark" ? "text-gray-300" : "text-gray-600"
                     }
                   >
-                    Proyek Freelance
+                    Freelance Project
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -123,14 +119,12 @@ const Home = () => {
                       theme === "dark" ? "text-gray-300" : "text-gray-600"
                     }
                   >
-                    Membuat skrip pengujian otomatis untuk aplikasi e-commerce
-                    menggunakan Playwright. Fokus pada pengujian fungsionalitas
-                    keranjang belanja, pembayaran, dan integrasi API.
+                    Created automated test scripts for an e-commerce application using Playwright. Focused on testing shopping cart functionality, payment processes, and API integration.
                   </p>
                 </CardContent>
               </Card>
 
-              {/* Proyek 3 */}
+              {/* Project 3 */}
               <Card
                 className={
                   theme === "dark"
@@ -142,7 +136,7 @@ const Home = () => {
                   <CardTitle
                     className={theme === "dark" ? "text-white" : "text-black"}
                   >
-                    Optimasi Pipeline CI/CD
+                    CI/CD Pipeline Optimization
                   </CardTitle>
                   <CardDescription
                     className={
@@ -158,10 +152,7 @@ const Home = () => {
                       theme === "dark" ? "text-gray-300" : "text-gray-600"
                     }
                   >
-                    Meningkatkan efisiensi pipeline CI/CD dengan
-                    mengintegrasikan pengujian otomatis dan memastikan eksekusi
-                    pengujian yang cepat dan andal. Menggunakan tools seperti
-                    Jenkins dan GitLab CI.
+                    Improved CI/CD pipeline efficiency by integrating automated testing and ensuring fast and reliable test execution. Used tools like Jenkins and GitLab CI.
                   </p>
                 </CardContent>
               </Card>
