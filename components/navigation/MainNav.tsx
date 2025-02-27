@@ -6,7 +6,7 @@ import { Github, Moon, Sun, Menu, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavState } from "./useNavState";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -15,12 +15,22 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { motion } from "framer-motion";
+
 export const MainNav = () => {
   const { theme, setTheme } = useTheme();
   const { isMenuOpen, toggleMenu } = useNavState();
   const pathname = usePathname();
   const [language, setLanguage] = useState("ID");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -49,7 +59,9 @@ export const MainNav = () => {
                       className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium bg-transparent ${
                         pathname === item.path
                           ? "text-blue-500 font-semibold"
-                          : ""
+                          : theme === "dark"
+                          ? "text-gray-300"
+                          : "text-gray-600"
                       }`}
                     >
                       {item.name}
@@ -79,7 +91,10 @@ export const MainNav = () => {
           onClick={toggleMenu}
           className="md:hidden"
         >
-          <Menu className="h-[1.2rem] w-[1.2rem]" />
+          <Menu
+  className={`${theme === "dark" ? "text-white" : "text-black"} h-[1.2rem] w-[1.2rem]`}
+/>
+
           <span className="sr-only">Toggle menu</span>
         </Button>
 
@@ -87,7 +102,7 @@ export const MainNav = () => {
         <div className="flex items-center gap-3">
           {/* Dropdown untuk Mobile */}
           <div className="md:hidden relative">
-            <Button variant="ghost" size="icon" onClick={toggleDropdown}>
+            <Button variant="ghost" size="icon" onClick={toggleDropdown} className={theme === "dark" ? "text-white" : "text-black"}>
               {isDropdownOpen ? (
                 <ChevronUp className="h-[1.2rem] w-[1.2rem]" />
               ) : (
@@ -101,14 +116,20 @@ export const MainNav = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="absolute right-0 mt-2 w-48 bg-background border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50"
+                className={`absolute right-0 mt-2 w-48 ${
+                  theme === "dark" ? "bg-stone-900" : "bg-white"
+                } border ${
+                  theme === "dark" ? "border-stone-800" : "border-gray-200"
+                } rounded-lg shadow-lg z-50`}
               >
                 <div className="p-2 flex flex-col gap-2">
                   {/* Baris pertama */}
                   <div className="flex w-full gap-2">
                     <Button
                       variant="ghost"
-                      className="w-1/4 justify-start"
+                      className={`w-1/4 justify-start ${
+                        theme === "dark" ? "text-gray-300" : "text-gray-600"
+                      }`}
                       onClick={() =>
                         setLanguage(language === "ID" ? "EN" : "ID")
                       }
@@ -117,7 +138,9 @@ export const MainNav = () => {
                     </Button>
                     <Button
                       variant="ghost"
-                      className="w-3/4 justify-start"
+                      className={`w-3/4 justify-start ${
+                        theme === "dark" ? "text-gray-300" : "text-gray-600"
+                      }`}
                       onClick={toggleTheme}
                     >
                       {theme === "dark" ? (
@@ -132,7 +155,9 @@ export const MainNav = () => {
                   {/* Baris kedua */}
                   <Button
                     variant="ghost"
-                    className="w-full flex items-center justify-center gap-2 text-center"
+                    className={`w-full flex items-center justify-center gap-2 text-center ${
+                      theme === "dark" ? "text-gray-300" : "text-gray-600"
+                    }`}
                     onClick={() =>
                       window.open("https://github.com/izaazwaskito", "_blank")
                     }
@@ -150,6 +175,7 @@ export const MainNav = () => {
             <Button
               variant="ghost"
               size="icon"
+              className={theme === "dark" ? "text-gray-300" : "text-gray-600"}
               onClick={() => setLanguage(language === "ID" ? "EN" : "ID")}
             >
               {language === "ID" ? "EN" : "ID"}
@@ -157,6 +183,7 @@ export const MainNav = () => {
             <Button
               variant="ghost"
               size="icon"
+              className={theme === "dark" ? "text-gray-300" : "text-gray-600"}
               onClick={() =>
                 window.open("https://github.com/izaazwaskito", "_blank")
               }
@@ -164,7 +191,12 @@ export const MainNav = () => {
               <Github className="h-[1.2rem] w-[1.2rem]" />
               <span className="sr-only">GitHub</span>
             </Button>
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className={theme === "dark" ? "text-gray-300" : "text-gray-600"}
+              onClick={toggleTheme}
+            >
               {theme === "dark" ? (
                 <Sun className="h-[1.2rem] w-[1.2rem]" />
               ) : (
@@ -199,7 +231,9 @@ export const MainNav = () => {
                       className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium w-full text-center bg-transparent ${
                         pathname === item.path
                           ? "text-blue-500 font-semibold"
-                          : ""
+                          : theme === "dark"
+                          ? "text-gray-300"
+                          : "text-gray-600"
                       }`}
                     >
                       {item.name}
@@ -209,9 +243,7 @@ export const MainNav = () => {
               ))}
             </NavigationMenuList>
           </NavigationMenu>
-          
         </motion.div>
-        
       )}
     </>
   );

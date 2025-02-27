@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { ClipboardList } from "lucide-react";
-
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
@@ -17,6 +16,7 @@ import { MainNav } from "@/components/navigation/MainNav";
 const Home = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -37,14 +37,23 @@ const Home = () => {
   return (
     <div
       className={`${
-        theme === "dark" ? "bg-black" : "bg-white"
+        theme === "dark" ? "bg-black text-white" : "bg-white text-black"
       } w-full font-inter overflow-hidden`}
     >
-      <div className="container mx-auto px-4 min-h-screen border-l border-r border-stone-800 border-[0.5px] border-dashed border-t-0 border-b-0">
+      <div
+        className={`container mx-auto px-4 min-h-screen border-l border-r ${
+          theme === "dark" ? "border-stone-800" : "border-gray-200"
+        } border-[0.5px] border-dashed border-t-0 border-b-0`}
+      >
         {/* Header Section */}
         <MainNav />
 
-        <div className="absolute left-0 w-full border-t border-stone-800 border-dashed"></div>
+        <div
+          className={`absolute left-0 w-full border-t ${
+            theme === "dark" ? "border-stone-800" : "border-gray-200"
+          } border-dashed`}
+        ></div>
+
         {/* Your content here */}
         <div className="flex justify-center items-center min-h-screen">
           <motion.div
@@ -53,7 +62,11 @@ const Home = () => {
             animate="visible"
             variants={fadeInUp}
           >
-            <h1 className="text-xl font-medium pb-2 flex">
+            <h1
+              className={`text-xl font-medium pb-2 flex ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
+            >
               <ClipboardList className="mr-2" />
               Projects/Work
             </h1>
@@ -160,7 +173,11 @@ const Home = () => {
           </motion.div>
         </div>
       </div>
-      <footer className="w-full py-4 text-center border-t border-stone-800 border-dashed overflow-hidden">
+      <footer
+        className={`w-full py-4 text-center border-t ${
+          theme === "dark" ? "border-stone-800" : "border-gray-200"
+        } border-dashed overflow-hidden`}
+      >
         <p className={theme === "dark" ? "text-gray-300" : "text-gray-600"}>
           Made with ❤️ by <span className="font-semibold">Izaaz</span>
         </p>
