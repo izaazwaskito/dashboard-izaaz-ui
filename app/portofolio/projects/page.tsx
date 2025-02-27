@@ -86,7 +86,7 @@ const Home = () => {
                       theme === "dark" ? "text-gray-300" : "text-gray-600"
                     }
                   >
-                    Developing and managing automated test scripts for Bank Mandiri's internal applications using UiPath and Playwright. Responsible for integrating automated testing into the CI/CD pipeline.
+                    Developing and managing automated test scripts for Bank Mandiri&apos;s internal applications using UiPath and Playwright. Responsible for integrating automated testing into the CI/CD pipeline.
                   </p>
                 </CardContent>
               </Card>

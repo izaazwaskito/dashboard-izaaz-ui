@@ -54,11 +54,11 @@ const Home = () => {
           >
             <h1 className="text-4xl font-bold pb-4 flex items-center justify-center">
               <Code2 className="mr-2" />
-              Hello, I'm Izaaz!
+              Hello, I&apos;m Izaaz!
               <VerifyBadge/>
             </h1>
             <p className="text-lg mb-8">
-              Welcome to my personal space. I'm a Frontend Developer and QA Specialist passionate about creating seamless user experiences and ensuring software quality.
+              Welcome to my personal space. I&apos;m a Frontend Developer and QA Specialist passionate about creating seamless user experiences and ensuring software quality.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Frontend Development Card */}
