@@ -17,7 +17,6 @@ import {
   FaCss3Alt,
   FaBootstrap,
   FaGitAlt,
-  FaGithub,
   FaReact,
 } from "react-icons/fa";
 import { SiTailwindcss, SiJavascript, SiTypescript } from "react-icons/si";
