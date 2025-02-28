@@ -51,6 +51,7 @@ export const MainNav = () => {
                 { name: "Home", path: "/" },
                 { name: "About", path: "/portofolio/about" },
                 { name: "Projects", path: "/portofolio/projects" },
+                { name: "Roadmap", path: "/portofolio/roadmap" },
                 { name: "Contact", path: "/portofolio/contacts" },
               ].map((item) => (
                 <NavigationMenuItem key={item.path}>
@@ -92,9 +93,8 @@ export const MainNav = () => {
           className="md:hidden"
         >
           <Menu
-  className={`${theme === "dark" ? "text-white" : "text-black"} h-[1.2rem] w-[1.2rem]`}
-/>
-
+            className={`${theme === "dark" ? "text-white" : "text-black"} h-[1.2rem] w-[1.2rem]`}
+          />
           <span className="sr-only">Toggle menu</span>
         </Button>
 
@@ -210,41 +210,63 @@ export const MainNav = () => {
 
       {/* Dropdown Menu Mobile dengan Animasi */}
       {isMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="md:hidden mt-4"
-        >
-          <NavigationMenu>
-            <NavigationMenuList className="flex flex-start gap-2 w-screen pb-4">
-              {[
-                { name: "Home", path: "/" },
-                { name: "About", path: "/portofolio/about" },
-                { name: "Projects", path: "/portofolio/projects" },
-                { name: "Contact", path: "/portofolio/contacts" },
-              ].map((item) => (
-                <NavigationMenuItem key={item.path}>
-                  <Link href={item.path} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium w-full text-center bg-transparent ${
-                        pathname === item.path
-                          ? "text-blue-500 font-semibold"
-                          : theme === "dark"
-                          ? "text-gray-300"
-                          : "text-gray-600"
-                      }`}
-                    >
-                      {item.name}
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        </motion.div>
-      )}
+  <motion.div
+    initial={{ opacity: 0, y: -10 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -10 }}
+    transition={{ duration: 0.8, ease: "easeInOut" }}
+    className="md:hidden mt-4 w-full overflow-x-auto whitespace-nowrap z-50"
+  >
+    <NavigationMenu>
+    <NavigationMenuList className="flex gap-2 w-full pb-4 ml-12 ">
+        {[
+          { name: "Home", path: "/" }, // Pastikan "Home" ada di sini
+        ].map((item) => (
+          <NavigationMenuItem key={item.path}>
+            <Link href={item.path} legacyBehavior passHref>
+              <NavigationMenuLink
+                className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium bg-transparent ${
+                  pathname === item.path
+                    ? "text-blue-500 font-semibold"
+                    : theme === "dark"
+                    ? "text-gray-300"
+                    : "text-gray-600"
+                }`}
+              >
+                {item.name}
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        ))}
+      </NavigationMenuList>
+      <NavigationMenuList className="flex gap-2 w-full pb-4">
+        {[
+          { name: "Home", path: "/" }, // Pastikan "Home" ada di sini
+          { name: "About", path: "/portofolio/about" },
+          { name: "Projects", path: "/portofolio/projects" },
+          { name: "Roadmap", path: "/portofolio/roadmap" },
+          { name: "Contact", path: "/portofolio/contacts" },
+        ].map((item) => (
+          <NavigationMenuItem key={item.path}>
+            <Link href={item.path} legacyBehavior passHref>
+              <NavigationMenuLink
+                className={`${navigationMenuTriggerStyle()} text-lg px-6 py-3 font-medium bg-transparent ${
+                  pathname === item.path
+                    ? "text-blue-500 font-semibold"
+                    : theme === "dark"
+                    ? "text-gray-300"
+                    : "text-gray-600"
+                }`}
+              >
+                {item.name}
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        ))}
+      </NavigationMenuList>
+    </NavigationMenu>
+  </motion.div>
+)}
     </>
   );
 };
