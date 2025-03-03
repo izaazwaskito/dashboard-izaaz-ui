@@ -21,6 +21,7 @@ import {
 } from "react-icons/fa";
 import { SiTailwindcss, SiJavascript, SiTypescript } from "react-icons/si";
 import { Button } from "@/components/ui/button";
+import Head from "next/head";
 
 const Home = () => {
   const { theme } = useTheme();
@@ -164,6 +165,9 @@ const Home = () => {
         theme === "dark" ? "bg-black text-white" : "bg-white text-black"
       } w-full font-inter overflow-hidden`}
     >
+      <Head>
+        <title>Izaaz Waskito | Roadmap</title>
+      </Head>
       <div
         className={`container mx-auto px-4 min-h-screen border-l border-r ${
           theme === "dark" ? "border-stone-800" : "border-gray-200"
@@ -187,35 +191,33 @@ const Home = () => {
             variants={fadeInUp}
           >
             <div className="flex space-x-4 mb-8">
-            <Button
-  onClick={() => setActiveCategory("qa")}
-  className={`px-6 py-2 font-semibold transition-colors duration-300 border-transparent 
+              <Button
+                onClick={() => setActiveCategory("qa")}
+                className={`px-6 py-2 font-semibold transition-colors duration-300 border-transparent 
     hover:bg-gray-500 hover:text-white 
     dark:hover:bg-gray-700 dark:hover:text-white
-    ${activeCategory === "qa"
-      ? "bg-black text-white dark:bg-white dark:text-black"
-      : "bg-white text-black dark:bg-black dark:text-white"
+    ${
+      activeCategory === "qa"
+        ? "bg-black text-white dark:bg-white dark:text-black"
+        : "bg-white text-black dark:bg-black dark:text-white"
     }`}
->
-  QA Automation
-</Button>
+              >
+                QA Automation
+              </Button>
 
-<Button
-  onClick={() => setActiveCategory("frontend")}
-  className={`px-6 py-2 font-semibold transition-colors duration-300 border-transparent 
+              <Button
+                onClick={() => setActiveCategory("frontend")}
+                className={`px-6 py-2 font-semibold transition-colors duration-300 border-transparent 
     hover:bg-gray-500 hover:text-white 
     dark:hover:bg-gray-700 dark:hover:text-white
-    ${activeCategory === "frontend"
-      ? "bg-black text-white dark:bg-white dark:text-black"
-      : "bg-white text-black dark:bg-black dark:text-white"
+    ${
+      activeCategory === "frontend"
+        ? "bg-black text-white dark:bg-white dark:text-black"
+        : "bg-white text-black dark:bg-black dark:text-white"
     }`}
->
-  Frontend
-</Button>
-
-
-
-
+              >
+                Frontend
+              </Button>
             </div>
             {/* Roadmap Section */}
             <h1

@@ -11,6 +11,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { MainNav } from "@/components/navigation/MainNav";
+import Head from "next/head";
 
 // Variants for Card animation
 const cardVariants = {
@@ -44,6 +45,9 @@ const Contacts = () => {
         theme === "dark" ? "bg-black" : "bg-white"
       } w-full font-inter overflow-hidden`}
     >
+      <Head>
+        <title>Izaaz Waskito | Contact</title>
+      </Head>
       <div className="container mx-auto px-4 min-h-screen border-x border-stone-800 border-dashed">
         {/* Header */}
         <MainNav />
@@ -75,7 +79,9 @@ const Contacts = () => {
                     exit="hidden"
                   >
                     <AccordionContent>
-                      I am a QA Automation Engineer at Mandiri, focusing on test automation and software quality analysis. I also share my dashboard on LinkedIn.
+                      I am a QA Automation Engineer at Mandiri, focusing on test
+                      automation and software quality analysis. I also share my
+                      dashboard on LinkedIn.
                     </AccordionContent>
                   </motion.div>
                 </AccordionItem>
@@ -90,14 +96,15 @@ const Contacts = () => {
                     exit="hidden"
                   >
                     <AccordionContent>
-                      I have experience in test automation, test script development, and test result analysis. I am also proficient in Next.js, JavaScript (Node.js), and various testing tools.
+                      I have experience in test automation, test script
+                      development, and test result analysis. I am also
+                      proficient in Next.js, JavaScript (Node.js), and various
+                      testing tools.
                     </AccordionContent>
                   </motion.div>
                 </AccordionItem>
                 <AccordionItem value="contact">
-                  <AccordionTrigger>
-                    How can you contact me?
-                  </AccordionTrigger>
+                  <AccordionTrigger>How can you contact me?</AccordionTrigger>
                   <motion.div
                     variants={accordionVariants}
                     initial="hidden"
@@ -126,8 +133,7 @@ const Contacts = () => {
       </div>
       <footer className="w-full py-4 text-center border-t border-stone-800 border-dashed overflow-hidden">
         <p className={theme === "dark" ? "text-gray-300" : "text-gray-600"}>
-          Made with ❤️ by{" "}
-          <span className="font-semibold">Izaaz</span>
+          Made with ❤️ by <span className="font-semibold">Izaaz</span>
         </p>
       </footer>
     </div>

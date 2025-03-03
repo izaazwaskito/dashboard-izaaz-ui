@@ -50,6 +50,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { MainNav } from "@/components/navigation/MainNav";
+import Head from "next/head";
 
 const Home = () => {
   const { theme } = useTheme();
@@ -113,6 +114,9 @@ const Home = () => {
         theme === "dark" ? "bg-black" : "bg-white"
       } w-full font-inter overflow-hidden`}
     >
+      <Head>
+        <title>Izaaz Waskito | About</title>
+      </Head>
       {/* Main Container */}
       <div className="container mx-auto px-4 min-h-screen  border-l border-r border-stone-800 border-[0.5px] border-dashed border-t-0 border-b-0">
         {/* Header Section */}

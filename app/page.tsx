@@ -4,14 +4,10 @@ import * as React from "react";
 import { Code, Search, TestTube2, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { MainNav } from "@/components/navigation/MainNav";
 import VerifyBadge from "@/components/ui/verifybadge";
+import Head from "next/head";
 
 const Home = () => {
   const { theme } = useTheme();
@@ -39,6 +35,9 @@ const Home = () => {
         theme === "dark" ? "bg-black" : "bg-white"
       } w-full font-inter overflow-hidden`}
     >
+      <Head>
+        <title>Izaaz Waskito | Home</title>
+      </Head>
       <div className="container mx-auto px-4 min-h-screen border-l border-r border-stone-800 border-[0.5px] border-dashed border-t-0 border-b-0">
         {/* Header Section */}
         <MainNav />
@@ -52,17 +51,23 @@ const Home = () => {
             animate="visible"
             variants={fadeInUp}
           >
-            <h1 className={`text-4xl font-bold pb-4 flex items-center justify-center ${
-    theme === "dark" ? "text-white" : "text-black"
-  }`}>
+            <h1
+              className={`text-4xl font-bold pb-4 flex items-center justify-center ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
+            >
               <Code2 className="mr-2" />
               Hello, I&apos;m Izaaz!
-              <VerifyBadge/>
+              <VerifyBadge />
             </h1>
-            <p className={`text-lg mb-8 ${
-    theme === "dark" ? "text-gray-300" : "text-gray-700"
-  }`}>
-              Welcome to my personal space. I&apos;m a Frontend Developer and QA Specialist passionate about creating seamless user experiences and ensuring software quality.
+            <p
+              className={`text-lg mb-8 ${
+                theme === "dark" ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Welcome to my personal space. I&apos;m a Frontend Developer and QA
+              Specialist passionate about creating seamless user experiences and
+              ensuring software quality.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Frontend Development Card */}
@@ -87,7 +92,8 @@ const Home = () => {
                       theme === "dark" ? "text-gray-300" : "text-gray-600"
                     }
                   >
-                    Crafting beautiful and responsive user interfaces using modern technologies like React and Tailwind CSS.
+                    Crafting beautiful and responsive user interfaces using
+                    modern technologies like React and Tailwind CSS.
                   </p>
                 </CardContent>
               </Card>
@@ -114,7 +120,8 @@ const Home = () => {
                       theme === "dark" ? "text-gray-300" : "text-gray-600"
                     }
                   >
-                    Ensuring the quality and usability of user interfaces through comprehensive testing strategies.
+                    Ensuring the quality and usability of user interfaces
+                    through comprehensive testing strategies.
                   </p>
                 </CardContent>
               </Card>
@@ -141,7 +148,8 @@ const Home = () => {
                       theme === "dark" ? "text-gray-300" : "text-gray-600"
                     }
                   >
-                    Verifying the functionality, reliability, and performance of APIs to ensure seamless integration.
+                    Verifying the functionality, reliability, and performance of
+                    APIs to ensure seamless integration.
                   </p>
                 </CardContent>
               </Card>

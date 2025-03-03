@@ -12,6 +12,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { MainNav } from "@/components/navigation/MainNav";
+import Head from "next/head";
 
 const Home = () => {
   const { theme } = useTheme();
@@ -40,6 +41,9 @@ const Home = () => {
         theme === "dark" ? "bg-black text-white" : "bg-white text-black"
       } w-full font-inter overflow-hidden`}
     >
+      <Head>
+        <title>Izaaz Waskito | Projects</title>
+      </Head>
       <div
         className={`container mx-auto px-4 min-h-screen border-l border-r ${
           theme === "dark" ? "border-stone-800" : "border-gray-200"
