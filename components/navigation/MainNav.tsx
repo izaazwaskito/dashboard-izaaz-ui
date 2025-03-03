@@ -44,7 +44,7 @@ export const MainNav = () => {
     <>
       <div className="relative flex items-center justify-between pt-2 pb-2">
         {/* Menu untuk Desktop */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden xl:flex items-center space-x-4">
           <NavigationMenu>
             <NavigationMenuList className="flex gap-4">
               {[
