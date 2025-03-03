@@ -129,7 +129,8 @@ const Home = () => {
           variants={fadeInUp}
         >
           {/* Profile Card */}
-          <h1 className="text-xl font-medium pb-2 flex">
+          <h1 className={`text-xl font-medium pb-2 flex ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+          >
             <User className="mr-2" />
             About
           </h1>
@@ -243,7 +244,8 @@ const Home = () => {
             </CardContent>
           </Card>
           <div id="Career" className="pt-10">
-            <h1 className="text-xl font-medium pb-2 flex">
+            <h1 className={`text-xl font-medium pb-2 flex ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
               <Briefcase className="mr-2" />
               Career
             </h1>
@@ -291,7 +293,8 @@ const Home = () => {
             </div>
           </div>
           <div id="Skill" className="pt-10 pb-10">
-            <h1 className="text-xl font-medium pb-2 flex">
+            <h1 className={`text-xl font-medium pb-2 flex ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
               <Code2 className="mr-2" />
               Skills
             </h1>

@@ -189,24 +189,32 @@ const Home = () => {
             <div className="flex space-x-4 mb-8">
             <Button
   onClick={() => setActiveCategory("qa")}
-  className={`px-6 py-2 font-semibold transition-colors duration-300 ${
-    activeCategory === "qa"
-      ? "bg-white text-black border border-black hover:bg-gray-100"
-      : "bg-black text-white"
-  }`}
+  className={`px-6 py-2 font-semibold transition-colors duration-300 border-transparent 
+    hover:bg-gray-500 hover:text-white 
+    dark:hover:bg-gray-700 dark:hover:text-white
+    ${activeCategory === "qa"
+      ? "bg-black text-white dark:bg-white dark:text-black"
+      : "bg-white text-black dark:bg-black dark:text-white"
+    }`}
 >
   QA Automation
 </Button>
+
 <Button
   onClick={() => setActiveCategory("frontend")}
-  className={`px-6 py-2 font-semibold transition-colors duration-300 ${
-    activeCategory === "frontend"
-      ? "bg-white text-black border border-black hover:bg-gray-100"
-      : "bg-black text-white"
-  }`}
+  className={`px-6 py-2 font-semibold transition-colors duration-300 border-transparent 
+    hover:bg-gray-500 hover:text-white 
+    dark:hover:bg-gray-700 dark:hover:text-white
+    ${activeCategory === "frontend"
+      ? "bg-black text-white dark:bg-white dark:text-black"
+      : "bg-white text-black dark:bg-black dark:text-white"
+    }`}
 >
   Frontend
 </Button>
+
+
+
 
             </div>
             {/* Roadmap Section */}
@@ -218,104 +226,106 @@ const Home = () => {
               <BookOpen className="mr-2" />
               Learning Roadmap
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {activeCategory === "qa"
-                ? qaItems.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Card
-                        className={`w-full ${
-                          theme === "dark"
-                            ? "bg-stone-900 border-stone-800"
-                            : "bg-gray-100 border-gray-200"
-                        } hover:shadow-lg transition-shadow duration-300`}
+            <div className="container mx-auto ">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {activeCategory === "qa"
+                  ? qaItems.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <CardHeader>
-                          <div className="flex items-center space-x-4">
-                            <div className="p-2 shadow-md">{item.icon}</div>
-                            <CardTitle
-                              className={
-                                theme === "dark" ? "text-white" : "text-black"
-                              }
+                        <Card
+                          className={`w-full ${
+                            theme === "dark"
+                              ? "bg-stone-900 border-stone-800"
+                              : "bg-gray-100 border-gray-200"
+                          } hover:shadow-lg transition-shadow duration-300 min-h-[250px]`}
+                        >
+                          <CardHeader>
+                            <div className="flex items-center space-x-4">
+                              <div className="p-2">{item.icon}</div>
+                              <CardTitle
+                                className={
+                                  theme === "dark" ? "text-white" : "text-black"
+                                }
+                              >
+                                {item.title}
+                              </CardTitle>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <CardDescription
+                              className={`min-h-[60px] ${
+                                theme === "dark"
+                                  ? "text-gray-300"
+                                  : "text-gray-600"
+                              }`}
                             >
-                              {item.title}
-                            </CardTitle>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <CardDescription
-                            className={
-                              theme === "dark"
-                                ? "text-gray-300"
-                                : "text-gray-600"
-                            }
-                          >
-                            {item.description}
-                          </CardDescription>
-                          <button
-                            className={`mt-4 px-4 py-2 rounded-md ${
-                              theme === "dark"
-                                ? "bg-stone-800 text-white hover:bg-stone-700"
-                                : "bg-gray-200 text-black hover:bg-gray-300"
-                            } transition-colors duration-300`}
-                          >
-                            Learn More
-                          </button>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))
-                : frontendItems.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Card
-                        className={`w-full ${
-                          theme === "dark"
-                            ? "bg-stone-900 border-stone-800"
-                            : "bg-gray-100 border-gray-200"
-                        } hover:shadow-lg transition-shadow duration-300`}
+                              {item.description}
+                            </CardDescription>
+                            <button
+                              className={`mt-4 px-4 py-2 rounded-md ${
+                                theme === "dark"
+                                  ? "bg-stone-800 text-white hover:bg-stone-700"
+                                  : "bg-gray-200 text-black hover:bg-gray-300"
+                              } transition-colors duration-300`}
+                            >
+                              Learn More
+                            </button>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    ))
+                  : frontendItems.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <CardHeader>
-                          <div className="flex items-center space-x-4">
-                            <div className="p-2 shadow-md">{item.icon}</div>
-                            <CardTitle
-                              className={
-                                theme === "dark" ? "text-white" : "text-black"
-                              }
+                        <Card
+                          className={`w-full ${
+                            theme === "dark"
+                              ? "bg-stone-900 border-stone-800"
+                              : "bg-gray-100 border-gray-200"
+                          } hover:shadow-lg transition-shadow duration-300 min-h-[250px]`}
+                        >
+                          <CardHeader>
+                            <div className="flex items-center space-x-4">
+                              <div className="p-2">{item.icon}</div>
+                              <CardTitle
+                                className={
+                                  theme === "dark" ? "text-white" : "text-black"
+                                }
+                              >
+                                {item.title}
+                              </CardTitle>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <CardDescription
+                              className={`min-h-[60px] min-w-[350px] ${
+                                theme === "dark"
+                                  ? "text-gray-300"
+                                  : "text-gray-600"
+                              }`}
                             >
-                              {item.title}
-                            </CardTitle>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <CardDescription
-                            className={
-                              theme === "dark"
-                                ? "text-gray-300"
-                                : "text-gray-600"
-                            }
-                          >
-                            {item.description}
-                          </CardDescription>
-                          <button
-                            className={`mt-4 px-4 py-2 rounded-md ${
-                              theme === "dark"
-                                ? "bg-stone-800 text-white hover:bg-stone-700"
-                                : "bg-gray-200 text-black hover:bg-gray-300"
-                            } transition-colors duration-300`}
-                          >
-                            Learn More
-                          </button>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
+                              {item.description}
+                            </CardDescription>
+                            <button
+                              className={`mt-4 px-4 py-2 rounded-md ${
+                                theme === "dark"
+                                  ? "bg-stone-800 text-white hover:bg-stone-700"
+                                  : "bg-gray-200 text-black hover:bg-gray-300"
+                              } transition-colors duration-300`}
+                            >
+                              Learn More
+                            </button>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    ))}
+              </div>
             </div>
           </motion.div>
         </div>
