@@ -215,10 +215,10 @@ export const MainNav = () => {
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -10 }}
     transition={{ duration: 0.8, ease: "easeInOut" }}
-    className="md:hidden mt-4 w-full overflow-x-auto whitespace-nowrap z-50"
+    className="xl:hidden mt-4 w-full overflow-x-auto whitespace-nowrap z-50"
   >
     <NavigationMenu>
-    <NavigationMenuList className="flex gap-2 w-full pb-4 ml-12 ">
+    <NavigationMenuList className="flex gap-2 w-full pb-4 ml-14 mr-20">
         {[
           { name: "Home", path: "/" }, // Pastikan "Home" ada di sini
         ].map((item) => (
@@ -241,7 +241,6 @@ export const MainNav = () => {
       </NavigationMenuList>
       <NavigationMenuList className="flex gap-2 w-full pb-4">
         {[
-          { name: "Home", path: "/" }, // Pastikan "Home" ada di sini
           { name: "About", path: "/portofolio/about" },
           { name: "Projects", path: "/portofolio/projects" },
           { name: "Roadmap", path: "/portofolio/roadmap" },
