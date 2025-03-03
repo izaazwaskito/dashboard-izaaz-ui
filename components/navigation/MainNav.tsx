@@ -90,7 +90,7 @@ export const MainNav = () => {
           variant="ghost"
           size="icon"
           onClick={toggleMenu}
-          className="md:hidden"
+          className="xl:hidden"
         >
           <Menu
             className={`${theme === "dark" ? "text-white" : "text-black"} h-[1.2rem] w-[1.2rem]`}
