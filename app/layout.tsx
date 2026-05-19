@@ -18,7 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    // FIX: Menambahkan kelas 'overflow-y-scroll' pada tag html agar lebar kontainer 
+    // antara halaman pendek (Home) dan halaman panjang (About) selalu konsisten 
+    // dan tidak membuat garis putus-putus melompat lagi.
+    <html lang="en" className="overflow-y-scroll" suppressHydrationWarning>
       <head>
         {/* Tambahkan link Google Fonts untuk Inter */}
         <link
