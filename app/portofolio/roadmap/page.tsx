@@ -4,10 +4,10 @@ import * as React from "react";
 import { BookOpen, Terminal, Code2, ShieldCheck, Layers, Cpu, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { MainNav } from "@/components/navigation/MainNav";
-import { FaNodeJs, FaGitAlt, FaReact } from "react-icons/fa";
-import { SiTailwindcss, SiJavascript, SiTypescript, SiUipath, SiSelenium } from "react-icons/si";
+import { FaNodeJs } from "react-icons/fa";
+import { SiTypescript, SiUipath, SiSelenium } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import Head from "next/head";
 

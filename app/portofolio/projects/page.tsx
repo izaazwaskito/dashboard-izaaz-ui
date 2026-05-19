@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { ClipboardList, Terminal, ArrowUpRight, ShieldCheck, Cpu, Layers } from "lucide-react";
+import { ClipboardList, Terminal, ShieldCheck, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { MainNav } from "@/components/navigation/MainNav";
 import Head from "next/head";
 

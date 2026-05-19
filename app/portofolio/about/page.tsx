@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { 
-  CalendarIcon, 
+import {  
   Briefcase, 
   User, 
   Code2, 
@@ -11,10 +10,9 @@ import {
   Layers, 
   Terminal, 
   Download, 
-  Cpu, 
-  ExternalLink 
+  Cpu
 } from "lucide-react";
-import { FaReact, FaNodeJs, FaDocker, FaJira, FaDatabase } from "react-icons/fa";
+import { FaNodeJs, FaDocker } from "react-icons/fa";
 import { TbBrandNextjs, TbBrandTypescript } from "react-icons/tb";
 import { 
   SiTailwindcss, 
@@ -24,15 +22,12 @@ import {
   SiGit, 
   SiUipath, 
   SiExpress, 
-  SiJavascript, 
   SiApollographql, 
-  SiWebauthn, 
   SiSelenium
 } from "react-icons/si";
 
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { MainNav } from "@/components/navigation/MainNav";
