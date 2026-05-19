@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,

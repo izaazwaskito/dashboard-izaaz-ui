@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Code, Search, TestTube2, Code2, ArrowUpRight, Terminal, Shield, CheckCircle } from "lucide-react";
+import { Code, Search, TestTube2, ArrowUpRight, Terminal} from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -67,10 +67,10 @@ const Home = () => {
           {/* HERO HEADER SECTION */}
           <motion.div className="space-y-6 text-left max-w-3xl" variants={itemVariants}>
             {/* Active Status Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-blue-500/20 bg-blue-500/5 text-blue-500">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-blue-500/20 bg-blue-500/5 text-gray-500">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
               Actively Automating at Bank BNI
             </div>
