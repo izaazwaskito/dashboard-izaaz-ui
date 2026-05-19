@@ -1,40 +1,36 @@
 "use client";
 
 import * as React from "react";
-import { ClipboardList, BookOpen } from "lucide-react";
+import { BookOpen, Terminal, Code2, ShieldCheck, Layers, Cpu, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { MainNav } from "@/components/navigation/MainNav";
-import {
-  FaHtml5,
-  FaCss3Alt,
-  FaBootstrap,
-  FaGitAlt,
-  FaReact,
-} from "react-icons/fa";
-import { SiTailwindcss, SiJavascript, SiTypescript } from "react-icons/si";
+import { FaNodeJs, FaGitAlt, FaReact } from "react-icons/fa";
+import { SiTailwindcss, SiJavascript, SiTypescript, SiUipath, SiSelenium } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import Head from "next/head";
 
-const Home = () => {
+const Roadmap = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
-  const [activeCategory, setActiveCategory] = React.useState("qa");
+  const [activeCategory, setActiveCategory] = React.useState("qa_core");
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 50 },
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08, delayChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
+      transition: { duration: 0.4, ease: "easeOut" }
+    }
   };
 
   React.useEffect(() => {
@@ -45,304 +41,177 @@ const Home = () => {
     return null;
   }
 
-  const qaItems = [
+  const isDark = theme === "dark";
+
+  // Kurikulum Silabus: Fokus Murni Pada Otomasi & Backend Tools
+  const qaCoreItems = [
     {
-      title: "Pengenalan QA",
-      description:
-        "Memahami dasar-dasar Quality Assurance dan perannya dalam pengembangan software.",
-      icon: <ClipboardList className="text-green-500" size={24} />,
+      title: "QA Automation Foundations",
+      description: "Memahami arsitektur DOM, teknik penentuan lokator tingkat lanjut via XPath element selection, dan strategi sinkronisasi script.",
+      icon: <Code2 className="text-blue-500 w-5 h-5" />
     },
     {
-      title: "Dasar Pengujian Manual",
-      description: "Belajar teknik pengujian manual dan penulisan test case.",
-      icon: <ClipboardList className="text-green-500" size={24} />,
+      title: "JavaScript / TS for Testing",
+      description: "Menguasai struktur pemrograman asinkron (Async/Await), manipulasi variabel bertipe, dan eksekusi skrip logika data.",
+      icon: <SiTypescript className="text-blue-600 w-5 h-5" />
     },
     {
-      title: "Pengenalan Automation",
-      description:
-        "Memahami konsep pengujian otomatis dan tools yang digunakan.",
-      icon: <ClipboardList className="text-green-500" size={24} />,
+      title: "UiPath Enterprise Testing",
+      description: "Membangun workflow otomatisasi desktop/web perbankan berskala besar, penanganan arsitektur REFramework, dan integrasi aset.",
+      icon: <SiUipath className="text-orange-600 w-5 h-5" />
     },
     {
-      title: "UiPath Basics",
-      description: "Belajar dasar-dasar UiPath untuk automation testing.",
-      icon: <img src="/icons/uipath.png" alt="UiPath" className="w-15 h-6" />,
+      title: "UiPath Orchestrator Control",
+      description: "Mengelola manajemen antrean data (Queues), trigger otomatis, deployment package pengujian, serta pengawasan log aset.",
+      icon: <Cpu className="text-orange-500 w-5 h-5" />
     },
     {
-      title: "UiPath Advanced",
-      description:
-        "Menguasai fitur lanjutan UiPath seperti orchestrator dan integrasi CI/CD.",
-      icon: <img src="/icons/uipath.png" alt="UiPath" className="w-15 h-6" />,
+      title: "Playwright E2E Framework",
+      description: "Arsitektur pengujian modern berbasis browser. Menyusun Page Object Models (POM), parallel testing execution, dan penanganan autentikasi.",
+      icon: <SiSelenium className="text-emerald-500 w-5 h-5" />
     },
     {
-      title: "Playwright Basics",
-      description: "Belajar dasar-dasar Playwright untuk end-to-end testing.",
-      icon: (
-        <img src="/icons/playwright.png" alt="Playwright" className="w-7 h-6" />
-      ),
+      title: "Katalon Studio Core",
+      description: "Menyusun skenario pengujian lintas platform menggunakan skrip Groovy/Java, manajemen Test Data, dan integrasi modul.",
+      icon: <SiSelenium className="text-green-600 w-5 h-5" />
     },
     {
-      title: "Playwright Advanced",
-      description:
-        "Menguasai fitur lanjutan Playwright seperti parallel testing dan integrasi dengan CI/CD.",
-      icon: (
-        <img src="/icons/playwright.png" alt="Playwright" className="w-7 h-6" />
-      ),
-    },
+      title: "API Regressions & Contract",
+      description: "Validasi integrasi endpoint RESTful & GraphQL, pengujian skema payload JSON, manajemen token, dan asersi status backend.",
+      icon: <Terminal className="text-purple-500 w-5 h-5" />
+    }
   ];
 
-  const frontendItems = [
+  const devOpsToolKitItems = [
     {
-      title: "HTML",
-      description: "Learn the basics of HTML.",
-      icon: <FaHtml5 className="text-orange-500" size={24} />,
+      title: "Node.js (CLI Engineering)",
+      description: "Membangun utilitas baris perintah internal mandiri untuk pemrosesan raw log testing menggunakan runtime Node.",
+      icon: <FaNodeJs className="text-emerald-600 w-5 h-5" />
     },
     {
-      title: "CSS Dasar",
-      description: "Understand basic CSS concepts.",
-      icon: <FaCss3Alt className="text-blue-500" size={24} />,
+      title: "Fast Compiling with esbuild",
+      description: "Memahami pipeline bundler modern berkecepatan tinggi untuk mengompilasi modul skrip testing terisolasi menjadi file eksekusi.",
+      icon: <Layers className="text-yellow-600 w-5 h-5" />
     },
     {
-      title: "CSS Layouting",
-      description: "Master CSS layout techniques.",
-      icon: <FaCss3Alt className="text-blue-500" size={24} />,
-    },
-    {
-      title: "CSS 3",
-      description: "Explore advanced CSS3 features.",
-      icon: <FaCss3Alt className="text-blue-500" size={24} />,
-    },
-    {
-      title: "Bootstrap",
-      description: "Learn to use Bootstrap for responsive design.",
-      icon: <FaBootstrap className="text-purple-500" size={24} />,
-    },
-    {
-      title: "Flexbox CSS",
-      description: "Understand Flexbox for layout management.",
-      icon: <FaCss3Alt className="text-blue-500" size={24} />,
-    },
-    {
-      title: "Git & Github",
-      description: "Learn version control with Git and GitHub.",
-      icon: <FaGitAlt className="text-red-500" size={24} />,
-    },
-    {
-      title: "Tailwind CSS",
-      description: "Master utility-first CSS with Tailwind.",
-      icon: <SiTailwindcss className="text-teal-500" size={24} />,
-    },
-    {
-      title: "Javascript Dasar",
-      description: "Learn the basics of JavaScript.",
-      icon: <SiJavascript className="text-yellow-500" size={24} />,
-    },
-    {
-      title: "Javascript DOM",
-      description: "Understand DOM manipulation with JavaScript.",
-      icon: <SiJavascript className="text-yellow-500" size={24} />,
-    },
-    {
-      title: "Javascript Lanjutan",
-      description: "Explore advanced JavaScript concepts.",
-      icon: <SiJavascript className="text-yellow-500" size={24} />,
-    },
-    {
-      title: "React JS",
-      description: "Master React for building user interfaces.",
-      icon: <FaReact className="text-blue-500" size={24} />,
-    },
-    {
-      title: "Typescript",
-      description: "Learn TypeScript for type-safe JavaScript.",
-      icon: <SiTypescript className="text-blue-500" size={24} />,
-    },
+      title: "CI/CD Pipeline Integration",
+      description: "Mengotomatisasi peluncuran script QA Automation pada container Docker secara terjadwal melalui runner GitHub Actions.",
+      icon: <ShieldCheck className="text-blue-500 w-5 h-5" />
+    }
   ];
+
+  const currentItems = activeCategory === "qa_core" ? qaCoreItems : devOpsToolKitItems;
 
   return (
-    <div
-      className={`${
-        theme === "dark" ? "bg-black text-white" : "bg-white text-black"
-      } w-full font-inter overflow-hidden`}
-    >
+    <div className={`${isDark ? "bg-zinc-950 text-zinc-50" : "bg-zinc-50 text-zinc-900"} w-full font-inter min-h-screen transition-colors duration-300 relative flex flex-col`}>
       <Head>
         <title>Izaaz Waskito | Roadmap</title>
       </Head>
-      <div
-        className={`container mx-auto px-4 min-h-screen border-l border-r ${
-          theme === "dark" ? "border-stone-800" : "border-gray-200"
-        } border-[0.5px] border-dashed border-t-0 border-b-0`}
-      >
-        {/* Header Section */}
-        <MainNav />
 
-        <div
-          className={`absolute left-0 w-full border-t ${
-            theme === "dark" ? "border-stone-800" : "border-gray-200"
-          } border-dashed`}
-        ></div>
-
-        {/* Your content here */}
-        <div className="flex pt-16">
-          <motion.div
-            className="my-auto"
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-          >
-            <div className="flex space-x-4 mb-8">
-              <Button
-                onClick={() => setActiveCategory("qa")}
-                className={`px-6 py-2 font-semibold transition-colors duration-300 border-transparent 
-    hover:bg-gray-500 hover:text-white 
-    dark:hover:bg-gray-700 dark:hover:text-white
-    ${
-      activeCategory === "qa"
-        ? "bg-black text-white dark:bg-white dark:text-black"
-        : "bg-white text-black dark:bg-black dark:text-white"
-    }`}
-              >
-                QA Automation
-              </Button>
-
-              <Button
-                onClick={() => setActiveCategory("frontend")}
-                className={`px-6 py-2 font-semibold transition-colors duration-300 border-transparent 
-    hover:bg-gray-500 hover:text-white 
-    dark:hover:bg-gray-700 dark:hover:text-white
-    ${
-      activeCategory === "frontend"
-        ? "bg-black text-white dark:bg-white dark:text-black"
-        : "bg-white text-black dark:bg-black dark:text-white"
-    }`}
-              >
-                Frontend
-              </Button>
-            </div>
-            {/* Roadmap Section */}
-            <h1
-              className={`text-3xl font-bold pb-4 flex mt-8 ${
-                theme === "dark" ? "text-white" : "text-black"
-              }`}
-            >
-              <BookOpen className="mr-2" />
-              Learning Roadmap
-            </h1>
-            <div className="container mx-auto ">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {activeCategory === "qa"
-                  ? qaItems.map((item, index) => (
-                      <motion.div
-                        key={index}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Card
-                          className={`w-full ${
-                            theme === "dark"
-                              ? "bg-stone-900 border-stone-800"
-                              : "bg-gray-100 border-gray-200"
-                          } hover:shadow-lg transition-shadow duration-300 min-h-[250px]`}
-                        >
-                          <CardHeader>
-                            <div className="flex items-center space-x-4">
-                              <div className="p-2">{item.icon}</div>
-                              <CardTitle
-                                className={
-                                  theme === "dark" ? "text-white" : "text-black"
-                                }
-                              >
-                                {item.title}
-                              </CardTitle>
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            <CardDescription
-                              className={`min-h-[60px] ${
-                                theme === "dark"
-                                  ? "text-gray-300"
-                                  : "text-gray-600"
-                              }`}
-                            >
-                              {item.description}
-                            </CardDescription>
-                            <button
-                              className={`mt-4 px-4 py-2 rounded-md ${
-                                theme === "dark"
-                                  ? "bg-stone-800 text-white hover:bg-stone-700"
-                                  : "bg-gray-200 text-black hover:bg-gray-300"
-                              } transition-colors duration-300`}
-                            >
-                              Learn More
-                            </button>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    ))
-                  : frontendItems.map((item, index) => (
-                      <motion.div
-                        key={index}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Card
-                          className={`w-full ${
-                            theme === "dark"
-                              ? "bg-stone-900 border-stone-800"
-                              : "bg-gray-100 border-gray-200"
-                          } hover:shadow-lg transition-shadow duration-300 min-h-[250px]`}
-                        >
-                          <CardHeader>
-                            <div className="flex items-center space-x-4">
-                              <div className="p-2">{item.icon}</div>
-                              <CardTitle
-                                className={
-                                  theme === "dark" ? "text-white" : "text-black"
-                                }
-                              >
-                                {item.title}
-                              </CardTitle>
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            <CardDescription
-                              className={`min-h-[60px] min-w-[350px] ${
-                                theme === "dark"
-                                  ? "text-gray-300"
-                                  : "text-gray-600"
-                              }`}
-                            >
-                              {item.description}
-                            </CardDescription>
-                            <button
-                              className={`mt-4 px-4 py-2 rounded-md ${
-                                theme === "dark"
-                                  ? "bg-stone-800 text-white hover:bg-stone-700"
-                                  : "bg-gray-200 text-black hover:bg-gray-300"
-                              } transition-colors duration-300`}
-                            >
-                              Learn More
-                            </button>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    ))}
-              </div>
-            </div>
-          </motion.div>
+      {/* 1. NAVBAR SECTION */}
+      <div className="w-full border-b border-zinc-200 dark:border-zinc-800 border-dashed relative z-20">
+        <div className="container mx-auto px-4 max-w-5xl relative">
+          <MainNav />
+          <div className="absolute left-0 top-0 bottom-0 border-l border-zinc-200 dark:border-zinc-800 border-dashed pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 border-r border-zinc-200 dark:border-zinc-800 border-dashed pointer-events-none"></div>
         </div>
       </div>
-      <footer
-        className={`w-full py-4 text-center border-t ${
-          theme === "dark" ? "border-stone-800" : "border-gray-200"
-        } border-dashed overflow-hidden`}
-      >
-        <p className={theme === "dark" ? "text-gray-300" : "text-gray-600"}>
-          Made with ❤️ by <span className="font-semibold">Izaaz</span>
-        </p>
-      </footer>
+
+      {/* 2. MAIN CONTENT CONTAINER */}
+      <div className="container mx-auto px-4 max-w-5xl border-x border-zinc-200 dark:border-zinc-800 border-dashed min-h-[calc(100vh-140px)] pb-20 relative z-10 flex-grow">
+        <motion.div
+          className="pt-16 space-y-10"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          {/* Header Title & Subtitle */}
+          <motion.div className="space-y-2 text-left" variants={itemVariants}>
+            <h1 className="text-sm font-semibold tracking-wider uppercase text-zinc-400 flex items-center gap-2">
+              <BookOpen size={16} /> Learning Roadmap
+            </h1>
+            <p className="text-xs md:text-sm text-zinc-500 max-w-xl">
+              Kurikulum kompetensi internal dan peta keahlian otomasi perangkat lunak yang saya dalami secara intensif.
+            </p>
+          </motion.div>
+
+          {/* Category Toggle Buttons */}
+          <motion.div className="flex flex-wrap gap-2 border-b border-zinc-100 dark:border-zinc-900 pb-4" variants={itemVariants}>
+            <Button
+              onClick={() => setActiveCategory("qa_core")}
+              variant="outline"
+              className={`text-xs font-semibold rounded-xl px-4 py-2 border transition-all ${
+                activeCategory === "qa_core"
+                  ? "bg-zinc-900 text-zinc-50 border-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:border-zinc-200"
+                  : "bg-transparent text-zinc-500 border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900"
+              }`}
+            >
+              QA Automation Stack
+            </Button>
+
+            <Button
+              onClick={() => setActiveCategory("frontend")}
+              variant="outline"
+              className={`text-xs font-semibold rounded-xl px-4 py-2 border transition-all ${
+                activeCategory === "frontend"
+                  ? "bg-zinc-900 text-zinc-50 border-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:border-zinc-200"
+                  : "bg-transparent text-zinc-500 border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900"
+              }`}
+            >
+              Utilities & DevOps Toolkit
+            </Button>
+          </motion.div>
+
+          {/* Cards Dynamic Grid Layout (Symmetrical & Clean) */}
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" 
+            variants={itemVariants}
+            key={activeCategory} // Memicu animasi ulang ketika kategori berganti
+          >
+            {currentItems.map((item, index) => (
+              <Card 
+                key={index}
+                className={`rounded-2xl border transition-all duration-300 p-5 flex flex-col justify-between ${
+                  isDark ? "bg-zinc-900/40 border-zinc-800 hover:border-zinc-700" : "bg-white border-zinc-200 hover:border-zinc-300"
+                } shadow-sm`}
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 shrink-0">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-sm font-bold tracking-tight text-zinc-800 dark:text-zinc-200">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Penanda Status Selesai / Checked */}
+                <div className="flex items-center gap-1.5 pt-4 text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                  <CheckCircle2 size={12} className="text-zinc-400 dark:text-zinc-600" />
+                  <span>Mastered</span>
+                </div>
+              </Card>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* 3. FOOTER SECTION */}
+      <div className="w-full border-t border-zinc-200 dark:border-zinc-800 border-dashed relative z-20 mt-auto">
+        <div className="container mx-auto px-4 max-w-5xl relative py-6 text-center text-xs text-zinc-400">
+          <p>
+            Made with ❤️ by <span className="font-semibold text-zinc-600 dark:text-zinc-300">Izaaz</span>
+          </p>
+          <div className="absolute left-0 top-0 bottom-0 border-l border-zinc-200 dark:border-zinc-800 border-dashed pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 border-r border-zinc-200 dark:border-zinc-800 border-dashed pointer-events-none"></div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default Roadmap;
