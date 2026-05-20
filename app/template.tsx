@@ -3,22 +3,38 @@
 import * as React from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export default function Template({ children }: { children: React.ReactNode }) {
-  const [isNavigating, setIsNavigating] = React.useState(false);
+// 1. Kita buat sub-komponen khusus untuk menangani navigasi & params
+function NavigationTracker({ onChange }: { onChange: () => void }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   React.useEffect(() => {
+    onChange();
+  }, [pathname, searchParams, onChange]);
+
+  return null; // Komponen ini tidak perlu merender apa-apa secara visual
+}
+
+export default function Template({ children }: { children: React.ReactNode }) {
+  const [isNavigating, setIsNavigating] = React.useState(false);
+
+  // Fungsi yang akan dipicu setiap kali URL atau Search Params berubah
+  const handleNavigationChange = React.useCallback(() => {
     setIsNavigating(true);
     const timer = setTimeout(() => {
       setIsNavigating(false);
     }, 1250);
 
     return () => clearTimeout(timer);
-  }, [pathname, searchParams]);
+  }, []);
 
   return (
     <>
+      {/* 2. Bungkus tracker dengan Suspense agar tidak merusak halaman statis / 404 */}
+      <React.Suspense fallback={null}>
+        <NavigationTracker onChange={handleNavigationChange} />
+      </React.Suspense>
+
       {isNavigating ? (
         <div className="w-full min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 flex flex-col relative animate-in fade-in duration-300">
           
@@ -56,7 +72,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
 
-              {/* TEKS LOADING MINIMALIS SINGLE-LINE (Dipersempit ke mt-3 biar presisi di bawah kubus) */}
+              {/* TEKS LOADING MINIMALIS SINGLE-LINE */}
               <div className="text-center mt-3 animate-in fade-in slide-in-from-top-1 duration-1000 ease-out">
                 <p className="text-[10px] font-mono text-zinc-400/80 dark:text-zinc-600 animate-pulse tracking-wider">
                   processing...
