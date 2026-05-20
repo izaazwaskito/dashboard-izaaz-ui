@@ -1,15 +1,15 @@
+// HAPUS 'use client' dari file ini agar Next.js bisa merender title dari server!
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
+// Setel Title Default & Template secara global dari server
 export const metadata: Metadata = {
-  title: "Izaaz Waskito",
-  description: "Portofolio",
-  icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+  title: {
+    default: "Izaaz Waskito",
+    template: "%s | Izaaz Waskito", // Otomatis menambahkan "| Izaaz Waskito" di belakang title setiap page
   },
+  description: "QA Automation Engineer & Frontend Developer Portfolio",
 };
 
 export default function RootLayout({
@@ -18,18 +18,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // FIX: Menambahkan kelas 'overflow-y-scroll' pada tag html agar lebar kontainer 
-    // antara halaman pendek (Home) dan halaman panjang (About) selalu konsisten 
-    // dan tidak membuat garis putus-putus melompat lagi.
     <html lang="en" className="overflow-y-scroll" suppressHydrationWarning>
       <head>
-        {/* Tambahkan link Google Fonts untuk Inter */}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="font-inter antialiased">
+      <body className="font-inter antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 transition-colors duration-300">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
