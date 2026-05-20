@@ -35,7 +35,9 @@ const Contacts = () => {
     }
   }
 
+  // Menggabungkan penanganan title & mounted dalam satu lifecycle
   React.useEffect(() => {
+    document.title = "Contacts | Izaaz Waskito"
     setMounted(true)
   }, [])
 
@@ -62,7 +64,7 @@ const Contacts = () => {
         </div>
       </div>
 
-      {/* 2. MAIN CONTENT CONTAINER (Sejajar Sempurna, Tanpa Paksaan Flex-Center Vertikal) */}
+      {/* 2. MAIN CONTENT CONTAINER */}
       <div className='container mx-auto px-4 max-w-5xl border-x border-zinc-200 dark:border-zinc-800 border-dashed min-h-[calc(100vh-140px)] pb-20 relative z-10 flex-grow'>
         <motion.div
           className='pt-16 space-y-10'
@@ -81,9 +83,9 @@ const Contacts = () => {
             </p>
           </motion.div>
 
-          {/* Contact Layout Grid (Bento Style: Akordion Kiri, Akses Kontak Kanan) */}
+          {/* Contact Layout Grid */}
           <motion.div
-            className='grid grid-cols-1 md:grid-cols-3 gap-4 text-left'
+            className='grid grid-cols-1 md:grid-cols-3 gap-4 text-left items-start' // Ditambahkan items-start agar kolom kanan tidak ikut melar ke bawah
             variants={itemVariants}
           >
             {/* Accordion Block (2 Kolom) */}
@@ -103,11 +105,11 @@ const Contacts = () => {
                     Who is Izaaz?
                   </AccordionTrigger>
                   <AccordionContent className='text-xs md:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed pt-1'>
-                    Saya adalah seorang **QA Automation Engineer** yang saat ini
+                    Saya adalah seorang <span className="font-bold">QA Automation Engineer</span> yang saat ini
                     aktif mengelola infrastruktur automasi pengujian untuk
-                    platform *corporate banking* **Bank BNI** (via NTT DATA
+                    platform <span className="font-italic">corporate banking</span> <span className="font-bold">Bank BNI</span> (via NTT DATA
                     Indonesia), setelah sebelumnya mendesain arsitektur regresi
-                    untuk proyek Kopra di **Bank Mandiri** (via Adidata).
+                    untuk proyek Kopra di <span className="font-bold">Bank Mandiri</span> (via Adidata).
                   </AccordionContent>
                 </AccordionItem>
 
@@ -119,12 +121,12 @@ const Contacts = () => {
                     What are my core technical focus areas?
                   </AccordionTrigger>
                   <AccordionContent className='text-xs md:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed pt-1'>
-                    Fokus utama saya bertumpu pada pembuatan *end-to-end
-                    framework automation* menggunakan **UiPath**,
-                    **Playwright**, dan **Katalon Studio**. Di luar itu, saya
-                    mengembangkan utilitas *backend command-line* (**Node.js CLI
-                    Kits** & **esbuild**) serta merancang antarmuka web modern
-                    berbasis **Next.js**.
+                    Fokus utama saya bertumpu pada pembuatan <span className="font-italic">end-to-end
+                    automation framework</span> menggunakan <span className="font-bold">UiPath</span>,{' '}
+                    <span className="font-bold">Playwright</span>, dan <span className="font-bold">Katalon Studio</span>. Di luar itu, saya
+                    mengembangkan utilitas <span className="font-italic">backend command-line</span> (<span className="font-bold">Node.js CLI
+                    Kits</span> & <span className="font-bold">esbuild</span>) serta merancang antarmuka web modern
+                    berbasis <span className="font-bold">Next.js</span>.
                   </AccordionContent>
                 </AccordionItem>
 
@@ -134,7 +136,7 @@ const Contacts = () => {
                   </AccordionTrigger>
                   <AccordionContent className='text-xs md:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed pt-1'>
                     Saya sangat terbuka untuk berdiskusi seputar standarisasi
-                    *automation pipelines* di sektor perbankan/fintech, optimasi
+                    <span className="font-italic"> automation pipelines</span> di sektor perbankan/fintech, optimasi
                     efisiensi rilis CI/CD, maupun kolaborasi proyek perkakas
                     internal berbasis JavaScript/TypeScript.
                   </AccordionContent>
@@ -143,7 +145,8 @@ const Contacts = () => {
             </Card>
 
             {/* Quick Contact Links Card (1 Kolom) */}
-            <div className='space-y-4 flex flex-col justify-between'>
+            {/* Menghapus flex-col justify-between agar tinggi box tetap konsisten */}
+            <div className='space-y-4'>
               {/* Email Box */}
               <a
                 href='mailto:izaaz.waskito@gmail.com'
@@ -173,11 +176,12 @@ const Contacts = () => {
               </a>
 
               {/* LinkedIn Box */}
+              {/* Menghapus class flex-grow agar tidak ditarik paksa */}
               <a
                 href='https://www.linkedin.com/in/izaaz-waskito-widyarto'
                 target='_blank'
                 rel='noopener noreferrer'
-                className={`p-5 rounded-2xl border flex items-center justify-between group transition-all duration-300 relative flex-grow ${
+                className={`p-5 rounded-2xl border flex items-center justify-between group transition-all duration-300 relative ${
                   isDark
                     ? 'bg-zinc-900/30 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50'
                     : 'bg-white border-zinc-200 hover:border-zinc-300'

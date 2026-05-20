@@ -33,10 +33,22 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { MainNav } from '@/components/navigation/MainNav'
 import Head from 'next/head'
 
+// 1. IMPORT SHADCN DIALOG COMPONENTS
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
 const Home = () => {
   const { theme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
   const [bniDuration, setBniDuration] = React.useState('')
+  
+  // 2. STATE UNTUK KONTROL PREVIEW PDF MODAL
+  const [isPdfOpen, setIsPdfOpen] = React.useState(false)
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -46,6 +58,10 @@ const Home = () => {
       transition: { duration: 0.6, ease: 'easeOut' }
     }
   }
+
+  React.useEffect(() => {
+    document.title = "About | Izaaz Waskito";
+  }, []);
 
   React.useEffect(() => {
     setMounted(true)
@@ -109,7 +125,6 @@ const Home = () => {
   const isDark = theme === 'dark'
 
   return (
-    // FIX: Tambahkan 'flex flex-col' agar mt-auto pada footer berfungsi
     <div
       className={`${
         isDark ? 'bg-zinc-950 text-zinc-50' : 'bg-zinc-50 text-zinc-900'
@@ -120,7 +135,6 @@ const Home = () => {
       </Head>
 
       {/* 1. NAVBAR SECTION (Full-Width Screen) */}
-      {/* FIX: Posisi w-full dan border-b di tingkat terluar untuk garis melintang penuh */}
       <div className='w-full border-b border-zinc-200 dark:border-zinc-800 border-dashed relative z-20'>
         <div className='container mx-auto px-4 max-w-5xl relative'>
           <MainNav />
@@ -172,7 +186,6 @@ const Home = () => {
                   size='sm'
                   asChild
                 >
-                  {/* FIX: Menghapus atribut download, menambahkan target="_blank" agar PDF terbuka langsung di halaman tab baru */}
                   <a
                     href='/CV Izaaz Waskito.pdf'
                     target='_blank'
@@ -315,24 +328,37 @@ const Home = () => {
                     </h3>
                   </div>
 
-                  {/* Button Download Contoh File */}
-                  <Button
-                    size='sm'
-                    variant='outline'
-                    // FIX: Mengatur border, warna teks, dan background hover yang dinamis mengikuti mode tema
-                    className='border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-900/80 hover:text-zinc-900 dark:hover:text-zinc-50 self-start sm:self-center transition-colors'
-                    asChild
-                  >
-                    {/* FIX: Mengubah href agar langsung membuka berkas PDF di tab baru (target="_blank") */}
-                    <a
-                      href='/downloads/sample-qa-report.pdf'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      <Download size={14} className='mr-1.5' /> View Sample
-                      Report
-                    </a>
-                  </Button>
+                  {/* 3. INTEGRASI SHADCN DIALOG PADA BUTTON VIEW SAMPLE REPORT */}
+                  <Dialog open={isPdfOpen} onOpenChange={setIsPdfOpen}>
+                    <DialogTrigger asChild>
+                      <Button
+                        size='sm'
+                        variant='outline'
+                        className='border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-900/80 hover:text-zinc-900 dark:hover:text-zinc-50 self-start sm:self-center transition-colors'
+                      >
+                        <Download size={14} className='mr-1.5' /> View Sample Report
+                      </Button>
+                    </DialogTrigger>
+                    
+                    <DialogContent className="max-w-5xl h-[85vh] flex flex-col p-0 overflow-hidden border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
+                      <DialogHeader className="px-6 py-4 border-b border-zinc-100 dark:border-zinc-900 bg-zinc-50/50 dark:bg-zinc-900/20">
+                        <DialogTitle className="text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+                          Sample QA Automation Report
+                        </DialogTitle>
+                      </DialogHeader>
+
+                      <div className="flex-1 w-full h-full bg-zinc-100 dark:bg-zinc-900 p-2">
+                        {isPdfOpen && (
+                          <iframe
+                            src="/x.pdf"
+                            className="w-full h-full rounded-md border-0 bg-white"
+                            title="QA Report Preview"
+                          />
+                        )}
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+
                 </div>
 
                 <p className='text-sm text-zinc-600 dark:text-zinc-300 max-w-3xl leading-relaxed'>
@@ -434,7 +460,6 @@ const Home = () => {
       </div>
 
       {/* 3. FOOTER SECTION (Full-Width Screen) */}
-      {/* FIX: Posisi w-full dan border-t di tingkat terluar untuk garis melintang penuh (simetris dengan Navbar) */}
       <div className='w-full border-t border-zinc-200 dark:border-zinc-800 border-dashed relative z-20 mt-auto'>
         <div className='container mx-auto px-4 max-w-5xl relative py-6 text-center text-xs text-zinc-400'>
           <p>

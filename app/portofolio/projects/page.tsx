@@ -33,6 +33,10 @@ const Projects = () => {
     setMounted(true)
   }, [])
 
+  React.useEffect(() => {
+  document.title = "Projects | Izaaz Waskito";
+}, []);
+
   if (!mounted) {
     return null
   }

@@ -35,6 +35,10 @@ const Home = () => {
     setMounted(true)
   }, [])
 
+  React.useEffect(() => {
+  document.title = "Home | Izaaz Waskito";
+}, []);
+
   if (!mounted) {
     return null
   }
@@ -48,7 +52,7 @@ const Home = () => {
       } w-full font-inter min-h-screen transition-colors duration-300 relative flex flex-col`}
     >
       <Head>
-        <title>Izaaz Waskito | Home</title>
+        <title>Home | Izaaz Waskito</title>
       </Head>
 
       {/* 1. NAVBAR SECTION (Tetap Terkunci & Sinkron) */}

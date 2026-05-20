@@ -45,6 +45,10 @@ const Roadmap = () => {
     setMounted(true)
   }, [])
 
+  React.useEffect(() => {
+  document.title = "Roadmap | Izaaz Waskito";
+}, []);
+
   if (!mounted) {
     return null
   }
