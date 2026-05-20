@@ -39,14 +39,14 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  DialogTrigger
+} from '@/components/ui/dialog'
 
 const Home = () => {
   const { theme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
   const [bniDuration, setBniDuration] = React.useState('')
-  
+
   // 2. STATE UNTUK KONTROL PREVIEW PDF MODAL
   const [isPdfOpen, setIsPdfOpen] = React.useState(false)
 
@@ -60,8 +60,8 @@ const Home = () => {
   }
 
   React.useEffect(() => {
-    document.title = "About | Izaaz Waskito";
-  }, []);
+    document.title = 'About | Izaaz Waskito'
+  }, [])
 
   React.useEffect(() => {
     setMounted(true)
@@ -136,45 +136,49 @@ const Home = () => {
 
       {/* ================= BACKGROUND DECORATION INTERIOR & EXTERIOR (FLAT GRID SETUP) ================= */}
       {/* 1. Pola Kotak-Kotak (Grid Pattern) di area luar & dalam */}
-      <div 
-  className="absolute top-0 left-0 right-0 h-[750px] z-0 opacity-[0.4] dark:opacity-[0.25] pointer-events-none mix-blend-normal"
-  style={{
-    backgroundImage: isDark 
-      ? `linear-gradient(to right, rgba(63, 63, 70, 0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(63, 63, 70, 0.2) 1px, transparent 1px)`
-      : `linear-gradient(to right, rgba(228, 228, 231, 0.7) 1px, transparent 1px), linear-gradient(to bottom, rgba(228, 228, 231, 0.7) 1px, transparent 1px)`,
-    backgroundSize: '40px 40px',
-    // Kembali menggunakan radial murni seperti Home karena tingginya sudah kita kunci (fix)
-    maskImage: 'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)',
-    WebkitMaskImage: 'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)'
-  }}
-/>
+      <div
+        className='absolute top-0 left-0 right-0 h-[750px] z-0 opacity-[0.4] dark:opacity-[1] pointer-events-none mix-blend-normal'
+        style={{
+          backgroundImage: isDark
+            ? // Opsi A: Menggunakan warna putih transparan agar kontras di latar belakang gelap
+              `linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)`
+            : // Opsi B: Kalau tetap mau pakai zinc, naikkan opacity-nya (misal: 0.4) dan lepas dark:opacity di className
+              // ? `linear-gradient(to right, rgba(63, 63, 70, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(63, 63, 70, 0.4) 1px, transparent 1px)`
+              `linear-gradient(to right, rgba(228, 228, 231, 0.7) 1px, transparent 1px), linear-gradient(to bottom, rgba(228, 228, 231, 0.7) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          maskImage:
+            'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)',
+          WebkitMaskImage:
+            'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)'
+        }}
+      />
 
       {/* 2. Efek Geometris 3D Isometrik Berbentuk V (Sisi Kiri dan Kanan Luar Container) */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+      <div className='absolute inset-0 z-0 overflow-hidden pointer-events-none select-none'>
         {/* Sayap V Sebelah Kiri (Hanya terlihat di layar desktop/lebar) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -50, rotateX: 45, rotateY: -15 }}
           animate={{ opacity: 1, x: 0, rotateX: 55, rotateY: -25 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="hidden xl:block absolute left-[calc(50%-680px)] top-44 w-[180px] h-[350px] origin-top-left border-l-4 border-b-4 border-blue-500/20 dark:border-blue-500/10 bg-gradient-to-br from-blue-500/[0.02] to-transparent backdrop-blur-[1px]"
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className='hidden xl:block absolute left-[calc(50%-680px)] top-44 w-[180px] h-[350px] origin-top-left border-l-4 border-b-4 border-blue-500/20 dark:border-blue-500/10 bg-gradient-to-br from-blue-500/[0.02] to-transparent backdrop-blur-[1px]'
           style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
         >
-          <div className="absolute inset-0 bg-grid-small border-t border-r border-dashed border-zinc-500/10" />
+          <div className='absolute inset-0 bg-grid-small border-t border-r border-dashed border-zinc-500/10' />
         </motion.div>
 
         {/* Sayap V Sebelah Kanan (Hanya terlihat di layar desktop/lebar) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 50, rotateX: 45, rotateY: 15 }}
           animate={{ opacity: 1, x: 0, rotateX: 55, rotateY: 25 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
-          className="hidden xl:block absolute right-[calc(50%-680px)] top-44 w-[180px] h-[350px] origin-top-right border-r-4 border-b-4 border-purple-500/20 dark:border-purple-500/10 bg-gradient-to-bl from-purple-500/[0.02] to-transparent backdrop-blur-[1px]"
+          transition={{ duration: 1, ease: 'easeOut', delay: 0.1 }}
+          className='hidden xl:block absolute right-[calc(50%-680px)] top-44 w-[180px] h-[350px] origin-top-right border-r-4 border-b-4 border-purple-500/20 dark:border-purple-500/10 bg-gradient-to-bl from-purple-500/[0.02] to-transparent backdrop-blur-[1px]'
           style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
         >
-          <div className="absolute inset-0 bg-grid-small border-t border-l border-dashed border-zinc-500/10" />
+          <div className='absolute inset-0 bg-grid-small border-t border-l border-dashed border-zinc-500/10' />
         </motion.div>
 
         {/* Tambahan Semburan Cahaya (Glow Ambiance) di tengah atas */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-blue-500/[0.06] to-transparent blur-[120px] rounded-full" />
+        <div className='absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-blue-500/[0.06] to-transparent blur-[120px] rounded-full' />
       </div>
       {/* ============================================================================ */}
 
@@ -380,29 +384,29 @@ const Home = () => {
                         variant='outline'
                         className='border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-900/80 hover:text-zinc-900 dark:hover:text-zinc-50 self-start sm:self-center transition-colors'
                       >
-                        <Download size={14} className='mr-1.5' /> View Sample Report
+                        <Download size={14} className='mr-1.5' /> View Sample
+                        Report
                       </Button>
                     </DialogTrigger>
-                    
-                    <DialogContent className="max-w-5xl h-[85vh] flex flex-col p-0 overflow-hidden border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
-                      <DialogHeader className="px-6 py-4 border-b border-zinc-100 dark:border-zinc-900 bg-zinc-50/50 dark:bg-zinc-900/20">
-                        <DialogTitle className="text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+
+                    <DialogContent className='max-w-5xl h-[85vh] flex flex-col p-0 overflow-hidden border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950'>
+                      <DialogHeader className='px-6 py-4 border-b border-zinc-100 dark:border-zinc-900 bg-zinc-50/50 dark:bg-zinc-900/20'>
+                        <DialogTitle className='text-zinc-800 dark:text-zinc-200 flex items-center gap-2'>
                           Sample QA Automation Report
                         </DialogTitle>
                       </DialogHeader>
 
-                      <div className="flex-1 w-full h-full bg-zinc-100 dark:bg-zinc-900 p-2">
+                      <div className='flex-1 w-full h-full bg-zinc-100 dark:bg-zinc-900 p-2'>
                         {isPdfOpen && (
                           <iframe
-                            src="/x.pdf"
-                            className="w-full h-full rounded-md border-0 bg-white"
-                            title="QA Report Preview"
+                            src='/x.pdf'
+                            className='w-full h-full rounded-md border-0 bg-white'
+                            title='QA Report Preview'
                           />
                         )}
                       </div>
                     </DialogContent>
                   </Dialog>
-
                 </div>
 
                 <p className='text-sm text-zinc-600 dark:text-zinc-300 max-w-3xl leading-relaxed'>
