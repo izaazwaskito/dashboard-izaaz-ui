@@ -36,8 +36,8 @@ const Home = () => {
   }, [])
 
   React.useEffect(() => {
-    document.title = "Home | Izaaz Waskito";
-  }, []);
+    document.title = 'Home | Izaaz Waskito'
+  }, [])
 
   if (!mounted) {
     return null
@@ -57,45 +57,49 @@ const Home = () => {
 
       {/* ================= BACKGROUND DECORATION INTERIOR & EXTERIOR ================= */}
       {/* 1. Pola Kotak-Kotak (Grid Pattern) di area luar & dalam */}
-      <div 
-  className="absolute top-0 left-0 right-0 h-[750px] z-0 opacity-[0.4] dark:opacity-[0.25] pointer-events-none mix-blend-normal"
-  style={{
-    backgroundImage: isDark 
-      ? `linear-gradient(to right, rgba(63, 63, 70, 0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(63, 63, 70, 0.2) 1px, transparent 1px)`
-      : `linear-gradient(to right, rgba(228, 228, 231, 0.7) 1px, transparent 1px), linear-gradient(to bottom, rgba(228, 228, 231, 0.7) 1px, transparent 1px)`,
-    backgroundSize: '40px 40px',
-    // Kembali menggunakan radial murni seperti Home karena tingginya sudah kita kunci (fix)
-    maskImage: 'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)',
-    WebkitMaskImage: 'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)'
-  }}
-/>
+      <div
+        className='absolute top-0 left-0 right-0 h-[750px] z-0 opacity-[0.4] dark:opacity-[1] pointer-events-none mix-blend-normal'
+        style={{
+          backgroundImage: isDark
+            ? // Opsi A: Menggunakan warna putih transparan agar kontras di latar belakang gelap
+              `linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)`
+            : // Opsi B: Kalau tetap mau pakai zinc, naikkan opacity-nya (misal: 0.4) dan lepas dark:opacity di className
+              // ? `linear-gradient(to right, rgba(63, 63, 70, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(63, 63, 70, 0.4) 1px, transparent 1px)`
+              `linear-gradient(to right, rgba(228, 228, 231, 0.7) 1px, transparent 1px), linear-gradient(to bottom, rgba(228, 228, 231, 0.7) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          maskImage:
+            'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)',
+          WebkitMaskImage:
+            'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)'
+        }}
+      />
 
       {/* 2. Efek Geometris 3D Isometrik Berbentuk V (Sisi Kiri dan Kanan Luar Container) */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+      <div className='absolute inset-0 z-0 overflow-hidden pointer-events-none select-none'>
         {/* Sayap V Sebelah Kiri (Hanya terlihat di layar desktop/lebar) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -50, rotateX: 45, rotateY: -15 }}
           animate={{ opacity: 1, x: 0, rotateX: 55, rotateY: -25 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="hidden xl:block absolute left-[calc(50%-680px)] top-[20%] w-[180px] h-[350px] origin-top-left border-l-4 border-b-4 border-blue-500/20 dark:border-blue-500/10 bg-gradient-to-br from-blue-500/[0.02] to-transparent backdrop-blur-[1px]"
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className='hidden xl:block absolute left-[calc(50%-680px)] top-[20%] w-[180px] h-[350px] origin-top-left border-l-4 border-b-4 border-blue-500/20 dark:border-blue-500/10 bg-gradient-to-br from-blue-500/[0.02] to-transparent backdrop-blur-[1px]'
           style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
         >
-          <div className="absolute inset-0 bg-grid-small border-t border-r border-dashed border-zinc-500/10" />
+          <div className='absolute inset-0 bg-grid-small border-t border-r border-dashed border-zinc-500/10' />
         </motion.div>
 
         {/* Sayap V Sebelah Kanan (Hanya terlihat di layar desktop/lebar) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 50, rotateX: 45, rotateY: 15 }}
           animate={{ opacity: 1, x: 0, rotateX: 55, rotateY: 25 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
-          className="hidden xl:block absolute right-[calc(50%-680px)] top-[20%] w-[180px] h-[350px] origin-top-right border-r-4 border-b-4 border-purple-500/20 dark:border-purple-500/10 bg-gradient-to-bl from-purple-500/[0.02] to-transparent backdrop-blur-[1px]"
+          transition={{ duration: 1, ease: 'easeOut', delay: 0.1 }}
+          className='hidden xl:block absolute right-[calc(50%-680px)] top-[20%] w-[180px] h-[350px] origin-top-right border-r-4 border-b-4 border-purple-500/20 dark:border-purple-500/10 bg-gradient-to-bl from-purple-500/[0.02] to-transparent backdrop-blur-[1px]'
           style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
         >
-          <div className="absolute inset-0 bg-grid-small border-t border-l border-dashed border-zinc-500/10" />
+          <div className='absolute inset-0 bg-grid-small border-t border-l border-dashed border-zinc-500/10' />
         </motion.div>
 
         {/* Tambahan Semburan Cahaya (Glow Ambiance) di tengah atas */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-blue-500/[0.06] to-transparent blur-[120px] rounded-full" />
+        <div className='absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-blue-500/[0.06] to-transparent blur-[120px] rounded-full' />
       </div>
       {/* ============================================================================ */}
 
