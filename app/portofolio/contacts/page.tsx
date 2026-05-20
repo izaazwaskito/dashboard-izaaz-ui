@@ -49,14 +49,58 @@ const Contacts = () => {
     <div
       className={`${
         isDark ? 'bg-zinc-950 text-zinc-50' : 'bg-zinc-50 text-zinc-900'
-      } w-full font-inter min-h-screen transition-colors duration-300 relative flex flex-col`}
+      } w-full font-inter min-h-screen transition-colors duration-300 relative flex flex-col overflow-x-hidden`}
     >
       <Head>
         <title>Izaaz Waskito | Contact</title>
       </Head>
 
+      {/* ================= BACKGROUND DECORATION INTERIOR & EXTERIOR (FLAT GRID SETUP) ================= */}
+      {/* 1. Pola Kotak-Kotak (Grid Pattern) di area luar & dalam */}
+      <div 
+  className="absolute top-0 left-0 right-0 h-[750px] z-0 opacity-[0.4] dark:opacity-[0.25] pointer-events-none mix-blend-normal"
+  style={{
+    backgroundImage: isDark 
+      ? `linear-gradient(to right, rgba(63, 63, 70, 0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(63, 63, 70, 0.2) 1px, transparent 1px)`
+      : `linear-gradient(to right, rgba(228, 228, 231, 0.7) 1px, transparent 1px), linear-gradient(to bottom, rgba(228, 228, 231, 0.7) 1px, transparent 1px)`,
+    backgroundSize: '40px 40px',
+    // Kembali menggunakan radial murni seperti Home karena tingginya sudah kita kunci (fix)
+    maskImage: 'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)',
+    WebkitMaskImage: 'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)'
+  }}
+/>
+
+      {/* 2. Efek Geometris 3D Isometrik Berbentuk V (Sisi Kiri dan Kanan Luar Container) */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        {/* Sayap V Sebelah Kiri (Hanya terlihat di layar desktop/lebar) */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50, rotateX: 45, rotateY: -15 }}
+          animate={{ opacity: 1, x: 0, rotateX: 55, rotateY: -25 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="hidden xl:block absolute left-[calc(50%-680px)] top-[20%] w-[180px] h-[350px] origin-top-left border-l-4 border-b-4 border-blue-500/20 dark:border-blue-500/10 bg-gradient-to-br from-blue-500/[0.02] to-transparent backdrop-blur-[1px]"
+          style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+        >
+          <div className="absolute inset-0 bg-grid-small border-t border-r border-dashed border-zinc-500/10" />
+        </motion.div>
+
+        {/* Sayap V Sebelah Kanan (Hanya terlihat di layar desktop/lebar) */}
+        <motion.div 
+          initial={{ opacity: 0, x: 50, rotateX: 45, rotateY: 15 }}
+          animate={{ opacity: 1, x: 0, rotateX: 55, rotateY: 25 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
+          className="hidden xl:block absolute right-[calc(50%-680px)] top-[20%] w-[180px] h-[350px] origin-top-right border-r-4 border-b-4 border-purple-500/20 dark:border-purple-500/10 bg-gradient-to-bl from-purple-500/[0.02] to-transparent backdrop-blur-[1px]"
+          style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+        >
+          <div className="absolute inset-0 bg-grid-small border-t border-l border-dashed border-zinc-500/10" />
+        </motion.div>
+
+        {/* Tambahan Semburan Cahaya (Glow Ambiance) di tengah atas */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-blue-500/[0.06] to-transparent blur-[120px] rounded-full" />
+      </div>
+      {/* ============================================================================ */}
+
       {/* 1. NAVBAR SECTION (Sama Persis & Terkunci) */}
-      <div className='w-full border-b border-zinc-200 dark:border-zinc-800 border-dashed relative z-20'>
+      <div className='w-full border-b border-zinc-200 dark:border-zinc-800 border-dashed relative z-20 backdrop-blur-sm bg-zinc-50/50 dark:bg-zinc-950/50'>
         <div className='container mx-auto px-4 max-w-5xl relative'>
           <MainNav />
           <div className='absolute left-0 top-0 bottom-0 border-l border-zinc-200 dark:border-zinc-800 border-dashed pointer-events-none'></div>
@@ -65,7 +109,7 @@ const Contacts = () => {
       </div>
 
       {/* 2. MAIN CONTENT CONTAINER */}
-      <div className='container mx-auto px-4 max-w-5xl border-x border-zinc-200 dark:border-zinc-800 border-dashed min-h-[calc(100vh-140px)] pb-20 relative z-10 flex-grow'>
+      <div className='container mx-auto px-4 max-w-5xl border-x border-zinc-200 dark:border-zinc-800 border-dashed min-h-[calc(100vh-140px)] pb-20 relative z-10 flex-grow bg-transparent'>
         <motion.div
           className='pt-16 space-y-10'
           initial='hidden'
@@ -85,15 +129,15 @@ const Contacts = () => {
 
           {/* Contact Layout Grid */}
           <motion.div
-            className='grid grid-cols-1 md:grid-cols-3 gap-4 text-left items-start' // Ditambahkan items-start agar kolom kanan tidak ikut melar ke bawah
+            className='grid grid-cols-1 md:grid-cols-3 gap-4 text-left items-start'
             variants={itemVariants}
           >
             {/* Accordion Block (2 Kolom) */}
             <Card
-              className={`md:col-span-2 rounded-2xl border p-6 ${
+              className={`md:col-span-2 rounded-2xl border p-6 backdrop-blur-sm ${
                 isDark
                   ? 'bg-zinc-900/40 border-zinc-800'
-                  : 'bg-white border-zinc-200'
+                  : 'bg-white/80 border-zinc-200'
               } shadow-sm`}
             >
               <Accordion type='single' collapsible className='w-full'>
@@ -145,15 +189,14 @@ const Contacts = () => {
             </Card>
 
             {/* Quick Contact Links Card (1 Kolom) */}
-            {/* Menghapus flex-col justify-between agar tinggi box tetap konsisten */}
             <div className='space-y-4'>
               {/* Email Box */}
               <a
                 href='mailto:izaaz.waskito@gmail.com'
-                className={`p-5 rounded-2xl border flex items-center justify-between group transition-all duration-300 ${
+                className={`p-5 rounded-2xl border flex items-center justify-between group transition-all duration-300 backdrop-blur-sm ${
                   isDark
                     ? 'bg-zinc-900/30 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50'
-                    : 'bg-white border-zinc-200 hover:border-zinc-300'
+                    : 'bg-white/80 border-zinc-200 hover:border-zinc-300'
                 }`}
               >
                 <div className='flex items-center gap-3'>
@@ -176,15 +219,14 @@ const Contacts = () => {
               </a>
 
               {/* LinkedIn Box */}
-              {/* Menghapus class flex-grow agar tidak ditarik paksa */}
               <a
                 href='https://www.linkedin.com/in/izaaz-waskito-widyarto'
                 target='_blank'
                 rel='noopener noreferrer'
-                className={`p-5 rounded-2xl border flex items-center justify-between group transition-all duration-300 relative ${
+                className={`p-5 rounded-2xl border flex items-center justify-between group transition-all duration-300 relative backdrop-blur-sm ${
                   isDark
                     ? 'bg-zinc-900/30 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50'
-                    : 'bg-white border-zinc-200 hover:border-zinc-300'
+                    : 'bg-white/80 border-zinc-200 hover:border-zinc-300'
                 }`}
               >
                 <div className='flex items-center gap-3'>
@@ -211,7 +253,7 @@ const Contacts = () => {
       </div>
 
       {/* 3. FOOTER SECTION */}
-      <div className='w-full border-t border-zinc-200 dark:border-zinc-800 border-dashed relative z-20 mt-auto'>
+      <div className='w-full border-t border-zinc-200 dark:border-zinc-800 border-dashed relative z-20 mt-auto backdrop-blur-sm bg-zinc-50/50 dark:bg-zinc-950/50'>
         <div className='container mx-auto px-4 max-w-5xl relative py-6 text-center text-xs text-zinc-400'>
           <p>
             Made with ❤️ by{' '}

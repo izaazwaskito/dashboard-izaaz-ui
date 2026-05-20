@@ -34,8 +34,8 @@ const Projects = () => {
   }, [])
 
   React.useEffect(() => {
-  document.title = "Projects | Izaaz Waskito";
-}, []);
+    document.title = "Projects | Izaaz Waskito";
+  }, []);
 
   if (!mounted) {
     return null
@@ -83,14 +83,58 @@ const Projects = () => {
     <div
       className={`${
         isDark ? 'bg-zinc-950 text-zinc-50' : 'bg-zinc-50 text-zinc-900'
-      } w-full font-inter min-h-screen transition-colors duration-300 relative flex flex-col`}
+      } w-full font-inter min-h-screen transition-colors duration-300 relative flex flex-col overflow-x-hidden`}
     >
       <Head>
         <title>Izaaz Waskito | Projects</title>
       </Head>
 
+      {/* ================= BACKGROUND DECORATION INTERIOR & EXTERIOR (FLAT GRID SETUP) ================= */}
+      {/* 1. Pola Kotak-Kotak (Grid Pattern) di area luar & dalam */}
+      <div 
+  className="absolute top-0 left-0 right-0 h-[750px] z-0 opacity-[0.4] dark:opacity-[0.25] pointer-events-none mix-blend-normal"
+  style={{
+    backgroundImage: isDark 
+      ? `linear-gradient(to right, rgba(63, 63, 70, 0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(63, 63, 70, 0.2) 1px, transparent 1px)`
+      : `linear-gradient(to right, rgba(228, 228, 231, 0.7) 1px, transparent 1px), linear-gradient(to bottom, rgba(228, 228, 231, 0.7) 1px, transparent 1px)`,
+    backgroundSize: '40px 40px',
+    // Kembali menggunakan radial murni seperti Home karena tingginya sudah kita kunci (fix)
+    maskImage: 'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)',
+    WebkitMaskImage: 'radial-gradient(circle at 50% 30%, black 60%, transparent 95%)'
+  }}
+/>
+
+      {/* 2. Efek Geometris 3D Isometrik Berbentuk V (Sisi Kiri dan Kanan Luar Container) */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        {/* Sayap V Sebelah Kiri (Hanya terlihat di layar desktop/lebar) */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50, rotateX: 45, rotateY: -15 }}
+          animate={{ opacity: 1, x: 0, rotateX: 55, rotateY: -25 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="hidden xl:block absolute left-[calc(50%-680px)] top-[20%] w-[180px] h-[350px] origin-top-left border-l-4 border-b-4 border-blue-500/20 dark:border-blue-500/10 bg-gradient-to-br from-blue-500/[0.02] to-transparent backdrop-blur-[1px]"
+          style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+        >
+          <div className="absolute inset-0 bg-grid-small border-t border-r border-dashed border-zinc-500/10" />
+        </motion.div>
+
+        {/* Sayap V Sebelah Kanan (Hanya terlihat di layar desktop/lebar) */}
+        <motion.div 
+          initial={{ opacity: 0, x: 50, rotateX: 45, rotateY: 15 }}
+          animate={{ opacity: 1, x: 0, rotateX: 55, rotateY: 25 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
+          className="hidden xl:block absolute right-[calc(50%-680px)] top-[20%] w-[180px] h-[350px] origin-top-right border-r-4 border-b-4 border-purple-500/20 dark:border-purple-500/10 bg-gradient-to-bl from-purple-500/[0.02] to-transparent backdrop-blur-[1px]"
+          style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+        >
+          <div className="absolute inset-0 bg-grid-small border-t border-l border-dashed border-zinc-500/10" />
+        </motion.div>
+
+        {/* Tambahan Semburan Cahaya (Glow Ambiance) di tengah atas */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-b from-blue-500/[0.06] to-transparent blur-[120px] rounded-full" />
+      </div>
+      {/* ============================================================================ */}
+
       {/* 1. NAVBAR SECTION (Sama Persis & Terkunci) */}
-      <div className='w-full border-b border-zinc-200 dark:border-zinc-800 border-dashed relative z-20'>
+      <div className='w-full border-b border-zinc-200 dark:border-zinc-800 border-dashed relative z-20 backdrop-blur-sm bg-zinc-50/50 dark:bg-zinc-950/50'>
         <div className='container mx-auto px-4 max-w-5xl relative'>
           <MainNav />
           <div className='absolute left-0 top-0 bottom-0 border-l border-zinc-200 dark:border-zinc-800 border-dashed pointer-events-none'></div>
@@ -99,7 +143,7 @@ const Projects = () => {
       </div>
 
       {/* 2. MAIN CONTENT CONTAINER */}
-      <div className='container mx-auto px-4 max-w-5xl border-x border-zinc-200 dark:border-zinc-800 border-dashed min-h-[calc(100vh-140px)] pb-20 relative z-10 flex-grow'>
+      <div className='container mx-auto px-4 max-w-5xl border-x border-zinc-200 dark:border-zinc-800 border-dashed min-h-[calc(100vh-140px)] pb-20 relative z-10 flex-grow bg-transparent'>
         <motion.div
           className='pt-16 space-y-10'
           initial='hidden'
@@ -125,11 +169,11 @@ const Projects = () => {
             {projectList.map((project, idx) => (
               <Card
                 key={idx}
-                className={`rounded-2xl border transition-all duration-300 flex flex-col justify-between group ${
+                className={`rounded-2xl border transition-all duration-300 flex flex-col justify-between group backdrop-blur-sm ${
                   isDark
                     ? 'bg-zinc-900/40 border-zinc-800 hover:border-zinc-700'
-                    : 'bg-white border-zinc-200 hover:border-zinc-300'
-                } shadow-sm ${idx === 0 ? 'md:col-span-2' : ''}`} // Membuat project BNI berukuran lebih besar (Bento Style)
+                    : 'bg-white/80 border-zinc-200 hover:border-zinc-300'
+                } shadow-sm ${idx === 0 ? 'md:col-span-2' : ''}`}
               >
                 <CardHeader className='pb-3'>
                   <div className='flex justify-between items-start gap-4'>
@@ -176,7 +220,7 @@ const Projects = () => {
       </div>
 
       {/* 3. FOOTER SECTION */}
-      <div className='w-full border-t border-zinc-200 dark:border-zinc-800 border-dashed relative z-20 mt-auto'>
+      <div className='w-full border-t border-zinc-200 dark:border-zinc-800 border-dashed relative z-20 mt-auto backdrop-blur-sm bg-zinc-50/50 dark:bg-zinc-950/50'>
         <div className='container mx-auto px-4 max-w-5xl relative py-6 text-center text-xs text-zinc-400'>
           <p>
             Made with ❤️ by{' '}
